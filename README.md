@@ -27,3 +27,8 @@ Sistema de restaurante para servidores de FiveM basado en QBCore;
 - qb-target
 - qb-radialmenu
 - oxmysql
+
+---
+
+#### Agradecimientos:
+a @caste2707 por ayudarme en la lógica de algunas cosas y la paciencia para cuando no funcionaba algo XD
