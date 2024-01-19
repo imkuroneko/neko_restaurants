@@ -2,10 +2,10 @@
 Sistema de restaurante para servidores de FiveM basado en QBCore;
 
 - Sistema de inventario
-- Puntos para crafteo de alimentos y bebidas (opcional que estos dependan de un item para poder ser crafteados)
+- Puntos para crafteo de alimentos y bebidas _(opcional que estos dependan de un item para poder ser crafteados)_
 - Sistema de "bandejas" para el mostrador
 - Sistema de "bandejas" para las mesas del mapeado
-- Sistema de menú (con item) para mostrar los articulos vendidos en el comercio
+- Sistema de menú (con item) para mostrar los articulos en venta en el comercio
 
 ---
 
