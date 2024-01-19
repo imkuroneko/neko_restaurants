@@ -40,6 +40,41 @@ CreateThread(function()
                 Player.Functions.AddItem(itemName, 1)
             end)
         end
+
+        if Config.Inventory == 'ox_inventory' then
+            for stashId, stashData in ipairs(commerceData.stashesInventory) do
+                CreateStash(
+                    commerceData.jobName..':refrigerador:'..stashId,
+                    "Refrigerador "..stashId.." ("..commerceData.jobName..")",
+                    Config.Stashes.maxSlots,
+                    Config.Stashes.maxWeight,
+                    { [commerceData.jobName] = 0 },
+                    stashData.coords
+                )
+            end
+
+            for stashId, stashData in ipairs(commerceData.stashesBar) do
+                CreateStash(
+                    commerceData.jobName..':TrayMostrador:'..stashId,
+                    "Bandeja del Mostrador "..stashId.." ("..commerceData.jobName..")",
+                    Config.Stashes.maxSlots,
+                    Config.Stashes.maxWeight,
+                    { [commerceData.jobName] = 0 },
+                    stashData.coords
+                )
+            end
+
+            for stashId, stashData in ipairs(commerceData.stashesTables) do
+                CreateStash(
+                    commerceData.jobName..':TrayClientes:'..stashId,
+                    "Bandeja de la Mesa "..stashId.." ("..commerceData.jobName..")",
+                    Config.Stashes.maxSlots,
+                    Config.Stashes.maxWeight,
+                    { [commerceData.jobName] = 0 },
+                    stashData.coords
+                )
+            end
+        end
     end
 end)
 
@@ -56,3 +91,7 @@ RegisterNetEvent('neko_restaurants:server:remove_drink_ingredients', function()
     if Config.drinkCraftItem == '' then return end
     Player.Functions.AddItem(Config.drinkCraftItem, 1)
 end)
+
+function CreateStash(id, label, slots, maxWeight, groups, coords)
+    exports.ox_inventory:RegisterStash(id, label, slots, maxWeight, nil, groups, coords)
+end

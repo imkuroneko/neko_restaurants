@@ -1,7 +1,7 @@
 local QBCore = exports["qb-core"]:GetCoreObject()
 
 -- ========= Eventos del Script =============================================================================================================================
-RegisterNetEvent('neko_restaurants:client:createBarTrays', function(trayName, trayEvent, num, trayParams, config)
+RegisterNetEvent('neko_restaurants:client:createBarTrays', function(trayName, trayId, trayEvent, num, trayParams, config)
     exports['qb-target']:AddBoxZone(
         trayName,
         trayParams.coords,
@@ -12,12 +12,11 @@ RegisterNetEvent('neko_restaurants:client:createBarTrays', function(trayName, tr
     )
 
     RegisterNetEvent(trayEvent, function()
-        TriggerServerEvent("inventory:server:OpenInventory", "stash", trayName, { maxweight = 125000, slots = 10 })
-        TriggerEvent("inventory:client:SetCurrentStash", trayName)
+        OpenStash(trayName, trayId, config.jobName, Config.Stashes.maxWeight, Config.Stashes.maxSlots)
     end)
 end)
 
-RegisterNetEvent('neko_restaurants:client:createTablesTrays', function(trayName, trayEvent, num, trayParams, config)
+RegisterNetEvent('neko_restaurants:client:createTablesTrays', function(trayName, trayId, trayEvent, num, trayParams, config)
     exports['qb-target']:AddBoxZone(
         trayName,
         trayParams.coords,
@@ -28,12 +27,11 @@ RegisterNetEvent('neko_restaurants:client:createTablesTrays', function(trayName,
     )
 
     RegisterNetEvent(trayEvent, function()
-        TriggerServerEvent("inventory:server:OpenInventory", "stash", trayName, { maxweight = 125000, slots = 10 })
-        TriggerEvent("inventory:client:SetCurrentStash", trayName)
+        OpenStash(trayName, trayId, config.jobName, Config.Stashes.maxWeight, Config.Stashes.maxSlots)
     end)
 end)
 
-RegisterNetEvent('neko_restaurants:client:createFridge', function(refriName, refriEvent, num, refriParams, config)
+RegisterNetEvent('neko_restaurants:client:createFridge', function(refriName, refriId, refriEvent, num, refriParams, config, jobName)
     exports['qb-target']:AddBoxZone(
         refriName,
         refriParams.coords,
@@ -44,12 +42,11 @@ RegisterNetEvent('neko_restaurants:client:createFridge', function(refriName, ref
     )
 
     RegisterNetEvent(refriEvent, function()
-        TriggerEvent("inventory:client:SetCurrentStash", refriName)
-        TriggerServerEvent("inventory:server:OpenInventory", "stash", refriName, { maxweight = 250000, slots = 20 })
+        OpenStash(refriName, refriId, config.jobName, Config.Stashes.maxWeight, Config.Stashes.maxSlots)
     end)
 end)
 
-RegisterNetEvent('neko_restaurants:client:createCraftArea', function(craftAreaName, craftAreaEvent, num, craftAreaParams, config)
+RegisterNetEvent('neko_restaurants:client:createCraftArea', function(craftAreaName, craftAreaEvent, num, craftAreaParams, config, jobName)
     local craftAreaLabel
     if craftAreaParams.type == 'food' then
         craftAreaLabel = Config.foodCraftAreaLabel
@@ -75,30 +72,34 @@ CreateThread(function()
         -- ========= Bandejas del mostrador
         for stashKey, stashData in ipairs(commerceData.stashesBar) do
             local trayName  = "Bandeja del Mostrador "..stashKey.." ("..jobName..")"
+            local trayId    = jobName..':TrayMostrador:'..stashKey
             local trayEvent = "neko_restaurants:TrayMostrador:"..jobName..':'..stashKey
 
             if stashData.prop ~= nil then
                 local obj = CreateObject(stashData.prop, stashData.coords.x, stashData.coords.y, stashData.coords.z, true, true, false)
                 FreezeEntityPosition(obj, true)
+                PlaceObjectOnGroundProperly(obj)
             end
 
-            TriggerEvent("neko_restaurants:client:createBarTrays", trayName, trayEvent, stashKey, stashData, commerceData)
+            TriggerEvent("neko_restaurants:client:createBarTrays", trayName, trayId, trayEvent, stashKey, stashData, commerceData)
         end
 
         -- ========= Bandejas para mesas
         for stashKey, stashData in ipairs(commerceData.stashesTables) do
             local trayName  = "Bandeja de la Mesa "..stashKey.." ("..jobName..")"
+            local trayId    = jobName..':TrayClientes:'..stashKey
             local trayEvent = "neko_restaurants:TrayClientes:"..jobName..':'..stashKey
 
-            TriggerEvent("neko_restaurants:client:createTablesTrays", trayName, trayEvent, stashKey, stashData, commerceData)
+            TriggerEvent("neko_restaurants:client:createTablesTrays", trayName, trayId, trayEvent, stashKey, stashData, commerceData)
         end
 
         -- ========= Refrigeradores (Inventario)
         for inventoryKey, inventoryData in ipairs(commerceData.stashesInventory) do
             local refriName  = jobName.."_refrigerador_"..inventoryKey
+            local refriId    = jobName..':refrigerador:'..inventoryKey
             local refriEvent = "neko_restaurants:refrigerador"..jobName..'_'..inventoryKey
 
-            TriggerEvent("neko_restaurants:client:createFridge", refriName, refriEvent, inventoryKey, inventoryData, Config)
+            TriggerEvent("neko_restaurants:client:createFridge", refriName, refriId, refriEvent, inventoryKey, inventoryData, commerceData, jobName)
         end
 
         -- ========= Bandejas para mesas
@@ -106,7 +107,7 @@ CreateThread(function()
             local craftAreaName  = "craftArea__"..jobName.."_"..craftKey.."_"..craftData.type
             local craftAreaEvent = "neko_restaurants:serviceCraftArea:"..jobName..':'..craftData.type
 
-            TriggerEvent("neko_restaurants:client:createCraftArea", craftAreaName, craftAreaEvent, craftKey, craftData, commerceData)
+            TriggerEvent("neko_restaurants:client:createCraftArea", craftAreaName, craftAreaEvent, craftKey, craftData, commerceData, jobName)
         end
 
         -- ========= Listar crafteables para sistema crafteo
@@ -209,3 +210,13 @@ CreateThread(function()
         end
     end
 end)
+
+-- ========= Funciones Varias ===============================================================================================================================
+function OpenStash(stashName, stashId, factionId, maxWeight, totalSlots)
+    if Config.Inventory == 'qb-inventory' then
+        TriggerServerEvent('inventory:server:OpenInventory', 'stash', stashName, { maxweight = maxWeight, slots = totalSlots })
+        TriggerEvent("inventory:client:SetCurrentStash", stashName)
+    else
+        exports.ox_inventory:openInventory('stash', { id = stashId, groups = factionId })
+    end
+end
