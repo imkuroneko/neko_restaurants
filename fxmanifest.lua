@@ -9,19 +9,23 @@ lua54 'yes'
 version '1.2'
 
 shared_scripts {
-    '@ox_lib/init.lua',
     'config.lua',
 }
 
 client_scripts {
     'client/restaurant.lua',
-    'client/menu.lua'
+    'client/menu.lua',
+    'client/radialmenu.lua',
+    'client/billing.lua',
+    'client/shop.lua',
 }
 
 server_scripts {
     '@oxmysql/lib/MySQL.lua',
     'server/restaurant.lua',
-    'server/menu.lua'
+    'server/menu.lua',
+    'server/billing.lua',
+    'server/shop.lua',
 }
 
 dependencies {

@@ -1,4 +1,5 @@
 local QBCore = exports["qb-core"]:GetCoreObject()
+spawnedProps = {}
 
 -- ========= Eventos del Script =============================================================================================================================
 RegisterNetEvent('neko_restaurants:client:createBarTrays', function(trayName, trayId, trayEvent, num, trayParams, config)
@@ -64,21 +65,21 @@ RegisterNetEvent('neko_restaurants:client:createCraftArea', function(craftAreaNa
     )
 end)
 
--- ========= Preparar las zonas para los comercios ==========================================================================================================
 CreateThread(function()
-    for commerceId, commerceData in pairs(Config.shops) do
+    for commerceId, commerceData in pairs(Config.Shops) do
         local jobName = commerceData.jobName
 
         -- ========= Bandejas del mostrador
         for stashKey, stashData in ipairs(commerceData.stashesBar) do
-            local trayName  = "Bandeja del Mostrador "..stashKey.." ("..jobName..")"
+            local trayName  = "Mostrador "..stashKey.." ("..jobName..")"
             local trayId    = jobName..':TrayMostrador:'..stashKey
             local trayEvent = "neko_restaurants:TrayMostrador:"..jobName..':'..stashKey
 
             if stashData.prop ~= nil then
-                local obj = CreateObject(stashData.prop, stashData.coords.x, stashData.coords.y, stashData.coords.z, true, true, false)
+                local obj = CreateObject(GetHashKey(stashData.prop), stashData.coords.x, stashData.coords.y, stashData.coords.z, true, true, false)
                 FreezeEntityPosition(obj, true)
                 PlaceObjectOnGroundProperly(obj)
+                table.insert(spawnedProps, obj)
             end
 
             TriggerEvent("neko_restaurants:client:createBarTrays", trayName, trayId, trayEvent, stashKey, stashData, commerceData)
@@ -106,6 +107,13 @@ CreateThread(function()
         for craftKey, craftData in ipairs(commerceData.craftingArea) do
             local craftAreaName  = "craftArea__"..jobName.."_"..craftKey.."_"..craftData.type
             local craftAreaEvent = "neko_restaurants:serviceCraftArea:"..jobName..':'..craftData.type
+
+            if craftData.prop ~= nil then
+                local obj = CreateObject(GetHashKey(craftData.prop), craftData.coords.x, craftData.coords.y, craftData.coords.z, true, true, false)
+                FreezeEntityPosition(obj, true)
+                PlaceObjectOnGroundProperly(obj)
+                table.insert(spawnedProps, obj)
+            end
 
             TriggerEvent("neko_restaurants:client:createCraftArea", craftAreaName, craftAreaEvent, craftKey, craftData, commerceData, jobName)
         end
@@ -184,7 +192,7 @@ CreateThread(function()
                     table.insert(craftMenu, { header = QBCore.Shared.Items[itemCod:lower()].label, txt = "", params = { event = 'neko_restaurants:client:craftConsumable:'..itemCod:lower() } })
                 end
 
-                table.insert(craftMenu, { header = "Cerrar", txt = "", params = { event = "qb-menu:closeMenu" } })
+                table.insert(craftMenu, { header = "✖️ Cerrar", txt = "", params = { event = "qb-menu:closeMenu" } })
 
                 exports['qb-menu']:openMenu(craftMenu)
             end)
@@ -220,3 +228,14 @@ function OpenStash(stashName, stashId, factionId, maxWeight, totalSlots)
         exports.ox_inventory:openInventory('stash', { id = stashId, groups = factionId })
     end
 end
+
+-- ========= Limpieza de props ==============================================================================================================================
+AddEventHandler('onClientResourceStop', function(resourceName)
+    if (GetCurrentResourceName() == resourceName) then
+        for _, object in ipairs(spawnedProps) do
+            DeleteObject(object)
+            DeleteEntity(object)
+            NetworkDeleteEntity(object)
+        end
+    end
+end)

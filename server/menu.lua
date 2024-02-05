@@ -5,7 +5,7 @@ RegisterServerEvent('neko_restaurants:server:updatemenu', function(url)
     local Player = QBCore.Functions.GetPlayer(source)
 
     local hasPermission = false
-    for key, value in pairs(Config.shops) do
+    for key, value in pairs(Config.Shops) do
         if Player.PlayerData.job.name == value.jobName then hasPermission = true end
     end
 
@@ -37,7 +37,7 @@ QBCore.Functions.CreateCallback('neko_restaurants:server:getMenuImages', functio
 
     -- armar una lista de los jobs
     local listaJobs = {}
-    for commerceId, commerceData in pairs(Config.shops) do
+    for commerceId, commerceData in pairs(Config.Shops) do
         table.insert(listaJobs, commerceData.jobName)
     end
 
@@ -60,4 +60,23 @@ QBCore.Functions.CreateCallback('neko_restaurants:server:getMenuImages', functio
     end
 
     cb(images)
+end)
+
+RegisterNetEvent('neko_restaurants:server:giveitem_restaurantmenu', function()
+    local Player = QBCore.Functions.GetPlayer(source)
+
+    JobName = ''
+    HasPermission = false
+    for key, value in pairs(Config.Shops) do
+        if Player.PlayerData.job.name == value.jobName then
+            HasPermission = true
+            JobName = value.jobName
+        end
+    end
+
+    if not HasPermission then
+        TriggerClientEvent('QBCore:Notify', source, "No tienes permiso para ejecutar este comando", 'error')
+    end
+
+    Player.Functions.AddItem('menu_'..JobName, 1)
 end)

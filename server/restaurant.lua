@@ -2,7 +2,7 @@ local QBCore = exports["qb-core"]:GetCoreObject()
 
 CreateThread(function()
     -- ========= Crear eventos para el crafteo de consumibles
-    for commerceId, commerceData in pairs(Config.shops) do
+    for commerceId, commerceData in pairs(Config.Shops) do
         for itemId, itemName in ipairs(commerceData.craftablesFoods) do
             local craftServerEvent = 'neko_restaurants:server:validateItems:'..itemName:lower()
             QBCore.Functions.CreateCallback(craftServerEvent, function(source, cb)
@@ -59,7 +59,7 @@ CreateThread(function()
                     "Bandeja del Mostrador "..stashId.." ("..commerceData.jobName..")",
                     Config.Stashes.maxSlots,
                     Config.Stashes.maxWeight,
-                    { [commerceData.jobName] = 0 },
+                    nil,
                     stashData.coords
                 )
             end
@@ -70,7 +70,7 @@ CreateThread(function()
                     "Bandeja de la Mesa "..stashId.." ("..commerceData.jobName..")",
                     Config.Stashes.maxSlots,
                     Config.Stashes.maxWeight,
-                    { [commerceData.jobName] = 0 },
+                    nil,
                     stashData.coords
                 )
             end
@@ -89,7 +89,7 @@ RegisterNetEvent('neko_restaurants:server:remove_drink_ingredients', function()
     local Player = QBCore.Functions.GetPlayer(source)
     if not Player then return end
     if Config.drinkCraftItem == '' then return end
-    Player.Functions.AddItem(Config.drinkCraftItem, 1)
+    Player.Functions.RemoveItem(Config.drinkCraftItem, 1)
 end)
 
 function CreateStash(id, label, slots, maxWeight, groups, coords)

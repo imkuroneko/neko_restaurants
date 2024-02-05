@@ -1,25 +1,47 @@
 Config = {}
 
-Config.foodCraftItem  = ''
-Config.drinkCraftItem = ''
+-- ===== Config generales
+Config.Inventory       = 'ox_inventory'    -- para los stashes :: 'ox_inventory' || 'qb-inventory'
+Config.Phone           = 'qs-smartphone'   -- para envío de correos posterior al pago :: 'qb-phone' || 'qs-smartphone'
+Config.Management      = 'Renewed-Banking' -- para recibir el dinero en la cuenta de la facción :: 'Renewed-Banking' || 'qb-management'
 
-Config.foodCraftAreaLabel  = '🍳 Estación de alimentos'
-Config.drinkCraftAreaLabel = '🥤 Estación de bebidas'
+-- ===== Crafteos
+Config.craftItemsPrice = 20                   -- precio del item
+Config.foodCraftItem   = 'item_craft_comidas' -- nombre del item requerido para crafteo de alimentos, dejar como '' para no utilizarlo
+Config.drinkCraftItem  = 'item_craft_bebidas' -- nombre del item requerido para crafteo de bebidas, dejar como '' para no utilizarlo
 
-Config.Inventory = 'ox_inventory' -- 'ox_inventory' || 'qb-inventory'
+-- ===== Tienda de insumos para crafteos
+Config.StoreCraftItems = {
+    targetZone = vector3(81.37, -219.27, 53.64),
+    targetHeading = 346.91,
+    coords = vector4(81.37, -219.27, 53.64, 346.91),
+    minZ = 50.00,
+    maxZ = 70.00,
+    pedModel = 'ig_mp_agent14',
+    pedHash = 0xFBF98469
+}
 
+-- ===== Configuración de stashes
 Config.Stashes = {
     maxSlots  = 20,
     maxWeight = 125000
 }
 
-Config.shops = {
+-- ===== i18n
+Config.foodCraftAreaLabel  = '🍳 Estación de alimentos'
+Config.drinkCraftAreaLabel = '🥤 Estación de bebidas'
+
+-- ===== Facciones
+Config.Shops = {
     ['burgershot'] = {
         -- ===== Para visualizar los perímetros temporalmente
         debug   = false,
 
         -- ===== Nombre del job (qb-core/shared/jobs.lua)
         jobName = 'burgershot',
+
+        -- ===== Porcentaje de comisión para el vendedor
+        comissionPerSale = 25,
 
         -- ===== Refrigeradores (para artículos ya preparados y cosas así)
         stashesInventory = {
@@ -54,25 +76,27 @@ Config.shops = {
         },
 
         craftablesFoods = {
-            'pizza_box_muzzarella',
-            'pizza_box_pepperoni',
-            'pizza_box_burger',
-            'pizza_box_chicken_bbq',
-            'pizza_box_jamon_queso',
-            'pizza_box_jamon_verduras',
-            'pizza_box_onion_bacon',
-            'pizza_box_vegetariana'
+            'alimento_1',
+            'alimento_2',
+            'alimento_3',
         },
 
         craftablesDrinks = {
+            'bebida_1',
+            'bebida_2',
+            'bebida_3',
         }
     },
+
     ['vanilla'] = {
         -- ===== Para visualizar los perímetros temporalmente
         debug   = false,
 
         -- ===== Nombre del job (qb-core/shared/jobs.lua)
         jobName = 'vanilla',
+
+        -- ===== Porcentaje de comisión para el vendedor
+        comissionPerSale = 25,
 
         -- ===== Refrigeradores (para artículos ya preparados y cosas así)
         stashesInventory = {
@@ -89,7 +113,6 @@ Config.shops = {
 
         -- ===== Mesas del comercio
         stashesTables = {
-            -- /targhelp
             -- { coords = vector3(128.816, -1284.495, 29.655), heading = 35.0, minZ = 4.253, maxZ = 6.853, width = 0.95, height = 1.5 },
         },
 
@@ -102,31 +125,27 @@ Config.shops = {
         },
 
         craftablesFoods = {
-            'caviar',
-            'tabla_quesos',
-            'sushi',
-            'choricitos_al_vino',
-            'coctel_de_mariscos'
+            'alimento_1',
+            'alimento_2',
+            'alimento_3',
         },
 
         craftablesDrinks = {
-            'mimosa',
-            'orgasmo_de_pitufo',
-            'panty_dropper',
-            'sex_on_the_beach',
-            'smirnoff_ice',
-            'cosmopolitan',
-            'champagne',
-            'coca_cola',
-            'jugo_frutilla'
+            'bebida_1',
+            'bebida_2',
+            'bebida_3',
         }
     },
+
     ['bahama'] = {
         -- ===== Para visualizar los perímetros temporalmente
         debug   = false,
 
         -- ===== Nombre del job (qb-core/shared/jobs.lua)
         jobName = 'bahama',
+
+        -- ===== Porcentaje de comisión para el vendedor
+        comissionPerSale = 25,
 
         -- ===== Refrigeradores (para artículos ya preparados y cosas así)
         stashesInventory = {
@@ -162,31 +181,28 @@ Config.shops = {
             { coords = vector3(-1386.664, -612.502, 30.319), heading = 30.00, minZ = 29.319, maxZ = 30.319, width = 1.4, height = 1.4, prop = nil, type = 'drink' },
         },
 
-
         craftablesFoods = {
-            'camarones_fritos',
-            'ceviche',
-            'croqueta_merluza',
-            'empanadas_calamar',
-            'mejillones_ajillo',
+            'alimento_1',
+            'alimento_2',
+            'alimento_3',
         },
 
         craftablesDrinks = {
-            'caipirinha',
-            'ginebra',
-            'mojito',
-            'pina_colada',
-            'tequila_sunrise',
-            'limonada',
-            'fanta',
+            'bebida_1',
+            'bebida_2',
+            'bebida_3',
         }
     },
+
     ['galaxy'] = {
         -- ===== Para visualizar los perímetros temporalmente
         debug   = false,
 
         -- ===== Nombre del job (qb-core/shared/jobs.lua)
         jobName = 'galaxy',
+
+        -- ===== Porcentaje de comisión para el vendedor
+        comissionPerSale = 25,
 
         -- ===== Refrigeradores (para artículos ya preparados y cosas así)
         stashesInventory = {
@@ -217,29 +233,27 @@ Config.shops = {
         },
 
         craftablesFoods = {
-            'palitos_muzzarella',
-            'alitas_pollo',
-            'aros_cebolla',
-            'hamburguesa',
-            'nuggets',
+            'alimento_1',
+            'alimento_2',
+            'alimento_3',
         },
 
         craftablesDrinks = {
-            'vodka',
-            'old_fashioned',
-            'daikiri_frutilla',
-            'coco_loco',
-            'skyblue',
-            'jugo_naranja',
-            'guarana',
+            'bebida_1',
+            'bebida_2',
+            'bebida_3',
         }
     },
+
     ['yellow'] = {
         -- ===== Para visualizar los perímetros temporalmente
         debug   = false,
 
         -- ===== Nombre del job (qb-core/shared/jobs.lua)
         jobName = 'yellow',
+
+        -- ===== Porcentaje de comisión para el vendedor
+        comissionPerSale = 25,
 
         -- ===== Refrigeradores (para artículos ya preparados y cosas así)
         stashesInventory = {
@@ -267,29 +281,27 @@ Config.shops = {
         },
 
         craftablesFoods = {
-            'empanada',
-            'papas_fritas',
-            'croquetas_pollo',
-            'choripan',
-            'brochetas',
+            'alimento_1',
+            'alimento_2',
+            'alimento_3',
         },
 
         craftablesDrinks = {
-            'chopp_cerveza',
-            'whisky',
-            'destornillador',
-            'cuba_libre',
-            'fernet_coca',
-            'sangria',
-            'drpepper',
+            'bebida_1',
+            'bebida_2',
+            'bebida_3',
         }
     },
+
     ['tequila'] = {
         -- ===== Para visualizar los perímetros temporalmente
         debug   = false,
 
         -- ===== Nombre del job (qb-core/shared/jobs.lua)
         jobName = 'tequila',
+
+        -- ===== Porcentaje de comisión para el vendedor
+        comissionPerSale = 25,
 
         -- ===== Refrigeradores (para artículos ya preparados y cosas así)
         stashesInventory = {
@@ -317,64 +329,65 @@ Config.shops = {
         },
 
         craftablesFoods = {
-            'burrito',
-            'nachos_con_queso',
-            'papas_rancheras',
-            'quesadillas',
-            'taco',
+            'alimento_1',
+            'alimento_2',
+            'alimento_3',
         },
 
         craftablesDrinks = {
-            'acapulco_noche',
-            'margarita',
-            'mezcal',
-            'michelada',
-            'tequila',
-            'jugo_durazno',
-            'sprite',
+            'bebida_1',
+            'bebida_2',
+            'bebida_3',
         }
     },
-    -- ['pizzeria'] = {
-    --     -- ===== Para visualizar los perímetros temporalmente
-    --     debug   = false,
 
-    --     -- ===== Nombre del job (qb-core/shared/jobs.lua)
-    --     jobName = 'pizzeria',
+    ['cafeday'] = {
+        -- ===== Para visualizar los perímetros temporalmente
+        debug   = false,
 
-        --     -- ===== Refrigeradores (para artículos ya preparados y cosas así)
-    --     stashesInventory = {
-    --         { coords = vector3(-1159.196, -1443.675, 4.653), heading = 35.00, minZ = 4.00, maxZ = 6.00, width = 1.4, height = 1.4 },
-    --     },
+        -- ===== Nombre del job (qb-core/shared/jobs.lua)
+        jobName = 'cafeday',
 
-    --     -- ===== Bandejas (para poder facilitar los artículos a los clientes)
-    --     stashesBar = {
-    --         { coords = vector3(-1165.88, -1442.07, 4.51), heading = 84.93, minZ = 4.00, maxZ = 6.00, width = 0.5, height = 0.7, prop = 'prop_food_tray_01' },
-    --     },
+        -- ===== Porcentaje de comisión para el vendedor
+        comissionPerSale = 25,
 
-    --     -- ===== Mesas del comercio
-    --     stashesTables = {
-    --         { coords = vector3(-1168.002, -1439.736, 4.553), heading = 35.0, minZ = 4.253, maxZ = 6.853, width = 0.95, height = 1.5 },
-    --         { coords = vector3(-1169.502, -1437.736, 4.553), heading = 35.0, minZ = 4.253, maxZ = 6.853, width = 0.95, height = 1.5 },
-    --     },
+        -- ===== Refrigeradores (para artículos ya preparados y cosas así)
+        stashesInventory = {
+            { coords = vector3(-512.582, -33.055, 45.625), heading = 355.0, minZ = 44.475, maxZ = 46.775, width = 1.2, height = 0.7 },
+            { coords = vector3(-511.482, -35.755, 45.625), heading = 355.0, minZ = 44.475, maxZ = 46.775, width = 0.9, height = 0.7 },
+        },
 
-    --     -- ===== Áreas de Crafteo
-    --     craftingArea = {
-    --         { coords = vector3(-1160.633, -1447.763, 4.353), heading = 35.0, minZ = 4.053, maxZ = 6.653, width = 1.4, height = 1.4, prop = nil, type = 'food' },
-    --         { coords = vector3(-1161.632, -1448.963, 4.353), heading = 35.0, minZ = 4.053, maxZ = 6.653, width = 1.4, height = 1.4, prop = nil, type = 'food' },
-    --     },
+        -- ===== Bandejas (para poder facilitar los artículos a los clientes)
+        stashesBar = {
+            { coords = vector3(-509.968, -33.976, 45.825), heading = 355.0, minZ = 45.725, maxZ = 45.925, width = 0.7, height = 1.0, prop = 'prop_food_cb_donuts' },
+            { coords = vector3(-508.068, -35.376, 45.825), heading = 90.0, minZ = 45.725, maxZ = 45.925, width = 0.7, height = 1.0, prop = 'prop_food_cb_donuts' },
+        },
 
-    --     craftablesFoods = {
-    --         'pizza_box_muzzarella',
-    --         'pizza_box_pepperoni',
-    --         'pizza_box_burger',
-    --         'pizza_box_chicken_bbq',
-    --         'pizza_box_jamon_queso',
-    --         'pizza_box_jamon_verduras',
-    --         'pizza_box_onion_bacon',
-    --         'pizza_box_vegetariana'
-    --     },
+        -- ===== Mesas del comercio
+        stashesTables = {
+            -- { coords = vector3(-1168.002, -1439.736, 4.553), heading = 35.0, minZ = 4.253, maxZ = 6.853, width = 0.95, height = 1.5 },
+            -- { coords = vector3(-1169.502, -1437.736, 4.553), heading = 35.0, minZ = 4.253, maxZ = 6.853, width = 0.95, height = 1.5 },
+        },
 
-    --     craftablesDrinks = {
-    --     }
-    -- },
+        -- ===== Áreas de Crafteo
+        craftingArea = {
+            { coords = vector3(-508.082, -36.455, 45.925), heading = 0.0, minZ = 45.675, maxZ = 46.175, width = 1.0, height = 1.1, prop = nil, type = 'drink' },
+            { coords = vector3(-514.882, -33.255, 46.025), heading = 0.0, minZ = 45.675, maxZ = 46.175, width = 1.6, height = 0.7, prop = nil, type = 'drink' },
+
+            { coords = vector3(-514.782, -37.455, 45.425), heading = 355.0, minZ = 44.875, maxZ = 45.975, width = 1.2, height = 1.5, prop = nil, type = 'food' },
+            { coords = vector3(-512.682, -35.255, 45.625), heading = 355.0, minZ = 45.075, maxZ = 46.175, width = 1.2, height = 0.7, prop = nil, type = 'food' },
+        },
+
+        craftablesFoods = {
+            'alimento_1',
+            'alimento_2',
+            'alimento_3',
+        },
+
+        craftablesDrinks = {
+            'bebida_1',
+            'bebida_2',
+            'bebida_3',
+        }
+    },
 }
