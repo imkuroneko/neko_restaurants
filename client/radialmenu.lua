@@ -71,3 +71,20 @@ function CreateMenu(PlayerData)
 
     menuID = exports['qb-radialmenu']:AddOption(menu)
 end
+
+-- ===== Eventos a nivel FiveM
+AddEventHandler('playerSpawned', function(_)
+    CreateMenu()
+end)
+
+AddEventHandler('onResourceStart', function(resourceName)
+    if resourceName == GetCurrentResourceName() then
+        CreateMenu()
+    end
+end)
+
+AddEventHandler('onResourceStop', function(resourceName)
+    if resourceName == GetCurrentResourceName() then
+        DeleteMenu()
+    end
+end)
