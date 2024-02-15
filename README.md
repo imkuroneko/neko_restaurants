@@ -21,6 +21,7 @@ Sistema de restaurante para servidores de FiveM basado en QBCore;
 - `qb-target`
 - `qb-management`
 - `qb-banking (old)` o `Renewed-Banking`
+- `qb-phone` o `qs-smartphone`
 
 ---
 
@@ -31,21 +32,21 @@ Sistema de restaurante para servidores de FiveM basado en QBCore;
 
 ---
 
-### Sistema de acciones (qb-radialmenu)
-![image](https://github.com/imkuroneko/neko_restaurants/assets/20273059/3d90091c-3878-4df0-acac-8262b4e1951b)
+<h3 align="center">Sistema de acciones (qb-radialmenu)</h3>
+<p align="center"><img src="https://github.com/imkuroneko/neko_restaurants/assets/20273059/3d90091c-3878-4df0-acac-8262b4e1951b"/></p>
 
-### Sistema de garage
-![image](https://github.com/imkuroneko/neko_restaurants/assets/20273059/23f53685-cc3a-4624-bff6-a09384944359)
+<h3 align="center">Sistema de garage</h3>
+<p align="center"><img src="https://github.com/imkuroneko/neko_restaurants/assets/20273059/23f53685-cc3a-4624-bff6-a09384944359"/></p>
 
-### Sistema de items/crafteo
-![image](https://github.com/imkuroneko/neko_restaurants/assets/20273059/bbe253f4-b343-45ba-bb1c-8cb1f6a94ddf)
-![image](https://github.com/imkuroneko/neko_restaurants/assets/20273059/f05123b5-7483-46cf-b69e-3d5526bf43df)
+<h3 align="center">Sistema de items/crafteo</h3>
+<p align="center"><img src="https://github.com/imkuroneko/neko_restaurants/assets/20273059/bbe253f4-b343-45ba-bb1c-8cb1f6a94ddf"/></p>
+<p align="center"><img src="https://github.com/imkuroneko/neko_restaurants/assets/20273059/f05123b5-7483-46cf-b69e-3d5526bf43df"/></p>
 
-### Stash mostrador
-![image](https://github.com/imkuroneko/neko_restaurants/assets/20273059/838ba6a4-9972-43a3-8293-1a4ec3e0ad12)
+<h3 align="center">Stash mostrador</h3>
+<p align="center"><img src="https://github.com/imkuroneko/neko_restaurants/assets/20273059/838ba6a4-9972-43a3-8293-1a4ec3e0ad12"/></p>
 
-### Stash inventario
-![image](https://github.com/imkuroneko/neko_restaurants/assets/20273059/692b781c-7a4c-4431-affa-77b0a6df2c2d)
+<h3 align="center">Stash inventario</h3>
+<p align="center"><img src="https://github.com/imkuroneko/neko_restaurants/assets/20273059/692b781c-7a4c-4431-affa-77b0a6df2c2d"/></p>
 
-### Sistema de cobros
-(pendiente de subir la foto 😅)
+<h3 align="center">Sistema de cobros</h3>
+<p align="center">(pendiente de subir la captura 😅)</p>
