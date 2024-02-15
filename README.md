@@ -1,4 +1,5 @@
-# 🍟 neko_restaurants
+<h1 align="center">🍟 neko_restaurants</h1>
+
 Sistema de restaurante para servidores de FiveM basado en QBCore;
 
 - Sistema de inventario (almacén).
