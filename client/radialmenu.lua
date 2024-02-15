@@ -58,6 +58,25 @@ function CreateMenu(PlayerData)
         }
     }
 
+    if Config.Shops[PlayerData.name].radialMenuStatus.enableOptions then
+        table.insert(menu.items, {
+            id = 'nekorestaurants_aviso_abierto',
+            title = 'Anuncio abierto',
+            icon = 'business-time',
+            type = 'server',
+            event = 'nekorestaurants:server:togglenotif_abierto',
+            shouldClose = true,
+        })
+        table.insert(menu.items, {
+            id = 'nekorestaurants_aviso_cerrado',
+            title = 'Anuncio cerrado',
+            icon = 'business-time',
+            type = 'server',
+            event = 'nekorestaurants:server:togglenotif_cerrado',
+            shouldClose = true,
+        })
+    end
+
     if PlayerData.isboss then
         table.insert(menu.items, {
             id = 'nekorestaurants_boss',

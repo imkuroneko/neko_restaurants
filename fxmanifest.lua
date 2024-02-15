@@ -6,7 +6,7 @@ author 'KuroNeko'
 
 lua54 'yes'
 
-version '1.2'
+version '2.1'
 
 shared_scripts {
     'config.lua',
@@ -17,7 +17,9 @@ client_scripts {
     'client/menu.lua',
     'client/radialmenu.lua',
     'client/billing.lua',
+    'client/avisos.lua',
     'client/shop.lua',
+    'client/garages.lua',
 }
 
 server_scripts {
@@ -25,9 +27,19 @@ server_scripts {
     'server/restaurant.lua',
     'server/menu.lua',
     'server/billing.lua',
+    'server/avisos.lua',
     'server/shop.lua',
 }
 
 dependencies {
-    'ox_inventory' -- comentar si se utilizará 'qb-inventory'
+    'ox_inventory'
+}
+
+ui_page 'html/index.html'
+
+files {
+    'html/index.html',
+    'html/style.css',
+    'html/index.js',
+    'html/*.jpg',
 }

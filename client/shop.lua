@@ -19,22 +19,22 @@ RegisterNetEvent('QBCore:Client:OnJobUpdate', function(JobInfo)
 end)
 
 CreateThread(function()
-    if Config.foodCraftItem ~= '' and Config.drinkCraftItem ~= '' and Config.foodCraftItem ~= nil and Config.drinkCraftItem ~= nil then
+    if Config.Settings.Crafting.foodItem ~= '' and Config.Settings.Crafting.drinkItem ~= '' and Config.Settings.Crafting.foodItem ~= nil and Config.Settings.Crafting.drinkItem ~= nil then
 
-        RequestModel( GetHashKey( Config.StoreCraftItems.pedModel ) )
-        while ( not HasModelLoaded( GetHashKey( Config.StoreCraftItems.pedModel ) ) ) do
+        RequestModel( GetHashKey( Config.Settings.StoreCraftItems.pedModel ) )
+        while ( not HasModelLoaded( GetHashKey( Config.Settings.StoreCraftItems.pedModel ) ) ) do
             Wait(1)
         end
-        local ped = CreatePed(1, Config.StoreCraftItems.pedHash, Config.StoreCraftItems.coords, false, true)
+        local ped = CreatePed(1, Config.Settings.StoreCraftItems.pedHash, Config.Settings.StoreCraftItems.coords, false, true)
         SetEntityInvincible(ped, true)
         SetBlockingOfNonTemporaryEvents(ped, true)
         FreezeEntityPosition(ped, true)
 
         exports['qb-target']:AddBoxZone(
             'nekoRestaurantsShop',
-            Config.StoreCraftItems.targetZone,
+            Config.Settings.StoreCraftItems.targetZone,
             1, 1,
-            { name = 'nekoRestaurantsShop', heading = Config.StoreCraftItems.targetHeading, debugPoly = false, minZ = Config.StoreCraftItems.minZ, maxZ = Config.StoreCraftItems.maxZ, },
+            { name = 'nekoRestaurantsShop', heading = Config.Settings.StoreCraftItems.targetHeading, debugPoly = false, minZ = Config.Settings.StoreCraftItems.minZ, maxZ = Config.Settings.StoreCraftItems.maxZ, },
             {
                 options = {
                     {

@@ -53,7 +53,7 @@ RegisterNetEvent('neko_billing:server:BillPlayer', function(data)
             if Config.Shops[data.job].comissionPerSale == nil or Config.Shops[data.job].comissionPerSale == 0 then
                 billed.Functions.RemoveMoney('bank', data.ammount, "neko_billing:payedInvoice")
 
-                if Config.Management == 'qb-management' then
+                if Config.Settings.Management == 'qb-management' then
                     exports['qb-management']:AddMoney(data.job, data.ammount)
                 else
                     exports['Renewed-Banking']:addAccountMoney(data.job, data.ammount)
@@ -82,7 +82,7 @@ RegisterNetEvent('neko_billing:server:BillPlayer', function(data)
                 billed.Functions.RemoveMoney('bank', data.ammount, "neko_billing:payedInvoice")
                 biller.Functions.AddMoney('bank', sellerComission, "neko_billing:comission")
 
-                if Config.Management == 'qb-management' then
+                if Config.Settings.Management == 'qb-management' then
                     exports['qb-management']:AddMoney(data.job, jobMoney)
                 else
                     exports['Renewed-Banking']:addAccountMoney(data.job, jobMoney)
@@ -127,5 +127,5 @@ function SendSucessNotify(source, message)
 end
 
 function SendEmail(citizenId, Sender, Subject, Message)
-    TriggerEvent(Config.Phone..':server:sendNewMailToOffline', citizenId, { sender  = Sender, subject = Subject, message = Message })
+    TriggerEvent(Config.Settings.Phone..':server:sendNewMailToOffline', citizenId, { sender  = Sender, subject = Subject, message = Message })
 end
