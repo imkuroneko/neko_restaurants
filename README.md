@@ -26,9 +26,9 @@ Sistema de restaurante para servidores de FiveM basado en QBCore;
 ---
 
 ### Detalles
-- Todos los items deben estar registrados en `qb-core/shared/items.lua` (para obtener el nombre) e `ox_inventory/data/items.lua`
+- Todos los items deben estar registrados en `qb-core/shared/items.lua` (para obtener el nombre) e `ox_inventory/data/items.lua` (de usar este inventario)
 - Los items de menú deben tener el nombre de `menu_{nombrefaccion}` (ej: `menu_pizzeria`)
-- Los items para craftear la comida o bebida (opcionales, dejar como '' si no se quiere utilizar item), deben ser declarados en el config y ubicar en alguna tienda para adquirirlos (que la economía fluya pls)
+- Los items para craftear la comida o bebida (setear como `''` si no se utilizará)
 
 ---
 
