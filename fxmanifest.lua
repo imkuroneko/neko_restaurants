@@ -41,5 +41,5 @@ files {
     'html/index.html',
     'html/style.css',
     'html/index.js',
-    'html/*.jpg',
+    'html/notif.mp3',
 }
