@@ -9,7 +9,7 @@ Sistema de restaurante para servidores de FiveM basado en QBCore;
 - Sistema de menú (con item) para mostrar los articulos en venta en el comercio.
 - Sistema de cobro a clientes.
 - Sistema de garage.
-- Sistema de anuncios abierto/cerrado
+- Sistema de anuncios abierto/cerrado. _(basado en `Manu-JobNotifications`)_
 
 ---
 
