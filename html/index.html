@@ -3,16 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manu-JobNotifications</title>
+    <title>JobNotifs</title>
     <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/all.css">
-    <script src="index.js"></script>
-    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body, html { margin: 0; padding: 0; height: 100%; }
+        body { display: flex; justify-content: center; top: 2vw; overflow: hidden; position: relative; }
+        .contenedor { width: 0; max-width: fit-content; display: none; border-radius: 5px; overflow: hidden; transition: width 0.3s ease; white-space: nowrap; background-color: #413c3ccc; max-height: 2vw; min-height: 2vw;  }
+        p { color: white; font-family: Arial, Helvetica, sans-serif; font-weight: 600; text-align: center; opacity: 0; min-width: fit-content; margin: 0 1.5vw; font-size: 0.8vw; position: relative; animation: expandText 1s forwards; top: -2.5vw; left: 1.3vw; padding: 1vw; }
+        .icon { background: #808080; width: 3vw; height: 2vw; display: flex; font-size: 1vw; min-width: 3vw; justify-content: center; align-items: center; }
+        @keyframes expandWidth { 0% { width: 0vw; } 100% { width: 5vw; } }
+        @keyframes expandText  { to { opacity: 1; } }
+    </style>
 </head>
 <body>
-    <div class="contenedor" id="miContenedor">
-        <div class="icono"></div>
-        <p id="text"></p>
+    <div class="contenedor">
+        <div class="icon"></div>
+        <p class="text"></p>
     </div>
+
+    <script>
+    $(document).ready(function() {
+        window.addEventListener('message', function(event) {
+            if([ 'nekorestaurants_abierto', 'nekorestaurants_cerrado' ].includes(event.data.type)) {
+                nekoRestaurants.sendAlert(event.data);
+            }
+        });
+    });
+
+    const nekoRestaurants = {
+        init: function() { },
+        audioCobro: null,
+
+        playSound: function() {
+            if(!nekoRestaurants.audioCobro) {
+                nekoRestaurants.audioCobro = new Audio("./notif.mp3");
+                nekoRestaurants.audioCobro.play();
+                nekoRestaurants.audioCobro.volume = 0.85;
+                nekoRestaurants.audioCobro = null;
+            }
+        },
+
+        sendAlert: function(data) {
+            $('.icon').css('background-color', data.iconbackgroundcolor).html(`<i style="color: ${data.iconcolor}" class="${data.icon}"></i>`);
+            $('.text').append(data.mensaje);
+            $('.contenedor').css('background-color', data.backgroundcolor).css('width', 'auto').css('width', $('.contenedor').width() + 'px').fadeIn();
+
+            nekoRestaurants.playSound();
+
+            setTimeout(() => {
+                $('.contenedor').fadeOut(1500, function() { $('.text, .icon').html(''); });
+            }, 4000);
+        }
+    }
+    </script>
 </body>
 </html>
