@@ -6,7 +6,7 @@ author 'KuroNeko'
 
 lua54 'yes'
 
-version '2.1'
+version '2.2'
 
 shared_scripts {
     'config.lua',
@@ -39,7 +39,5 @@ ui_page 'html/index.html'
 
 files {
     'html/index.html',
-    'html/style.css',
-    'html/index.js',
     'html/notif.mp3',
 }
