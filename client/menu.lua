@@ -19,7 +19,7 @@ RegisterNetEvent('neko_restaurants:client:updateMenu', function()
         header = "📋 Menú del local",
         submitText = "Guardar",
         inputs = {
-            { text = "Enlace del menú (imgur)", name = "url", type = "url", isRequired = true },
+            { text = "Imagen del menú (solo enlaces de imgur) <br> <small>(ej: https://i.imgur.com/56MnFt6.png)</small>", name = "url", type = "url", isRequired = true },
         },
     })
 
