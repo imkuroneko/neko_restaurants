@@ -19,10 +19,10 @@ end)
 
 
 RegisterNetEvent('nekorestaurants:client:notif_abierto')
-AddEventHandler('nekorestaurants:client:notif_abierto', function()
-    if not PlayerData.onduty then return end
-    if listaJobs[PlayerJob.name] == nil then return end
-    local jobInfo = Config.Shops[PlayerJob.name]
+AddEventHandler('nekorestaurants:client:notif_abierto', function(jobName)
+    -- if not PlayerData.onduty then return end
+    if listaJobs[jobName] == nil then return end
+    local jobInfo = Config.Shops[jobName]
     if not jobInfo.radialMenuStatus.enableOptions then return end
 
     SendNUIMessage({
@@ -36,10 +36,10 @@ AddEventHandler('nekorestaurants:client:notif_abierto', function()
 end)
 
 RegisterNetEvent('nekorestaurants:client:notif_cerrado')
-AddEventHandler('nekorestaurants:client:notif_cerrado', function()
-    if not PlayerData.onduty then return end
-    if listaJobs[PlayerJob.name] == nil then return end
-    local jobInfo = Config.Shops[PlayerJob.name]
+AddEventHandler('nekorestaurants:client:notif_cerrado', function(jobName)
+    -- if not PlayerData.onduty then return end
+    if listaJobs[jobName] == nil then return end
+    local jobInfo = Config.Shops[jobName]
     if not jobInfo.radialMenuStatus.enableOptions then return end
 
     SendNUIMessage({
