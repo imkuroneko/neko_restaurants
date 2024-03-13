@@ -53,10 +53,22 @@ Sistema de restaurante para servidores de FiveM basado en QBCore;
 <br>
 
 <h3 align="center">Sistema de acciones (qb-radialmenu)</h3>
-<p align="center"><img src="https://github.com/imkuroneko/neko_restaurants/assets/20273059/781bf0cc-5e54-4688-8ddf-41f991d1bf2e"/></p>
+<table>
+    <tr> <th> Menú principal </th> <th> Sistema de avisos </th> </tr>
+    <tr>
+        <td> <img src="https://github.com/imkuroneko/neko_restaurants/assets/20273059/e5c5be3f-6d15-439f-82e3-b2f9eca474f8" alt="Menú principal"/> </td>
+        <td> <img src="https://github.com/imkuroneko/neko_restaurants/assets/20273059/4924c6e9-09b1-4732-9e1e-786c80c79e06" alt="Sistema de avisos"/> </td>
+    </tr>
+</table>
 
 <h3 align="center">Sistema de garage</h3>
-<p align="center"><img src="https://github.com/imkuroneko/neko_restaurants/assets/20273059/23f53685-cc3a-4624-bff6-a09384944359"/></p>
+<table>
+    <tr> <th> Interacciones PED </th> <th> Lista de opciones </th> </tr>
+    <tr>
+        <td> <img src="https://github.com/imkuroneko/neko_restaurants/assets/20273059/20d9dc6e-7101-4c5f-bcd9-be3e154deccd" alt="Interacciones PED"/> </td>
+        <td> <img src="https://github.com/imkuroneko/neko_restaurants/assets/20273059/860902cc-7a2a-408b-aa81-11cd3702c0d8" alt="Lista de opciones"/> </td>
+    </tr>
+</table>
 
 <h3 align="center">Puntos de alimentos y bebidas</h3>
 <table>
