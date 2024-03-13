@@ -1,5 +1,12 @@
 <h1 align="center">🍟 neko_restaurants</h1>
 
+<p align="center">
+  <img src="https://img.shields.io/github/repo-size/imkuroneko/neko_restaurants?style=flat"/> &nbsp;
+  <img src="https://img.shields.io/github/languages/top/imkuroneko/neko_restaurants?style=flat"/> &nbsp;
+  <img src="https://img.shields.io/github/last-commit/imkuroneko/neko_restaurants?color=pink&style=flat"/>
+</p>
+
+
 Sistema de restaurante para servidores de FiveM basado en QBCore;
 
 - Sistema de inventario (almacén).
@@ -62,3 +69,11 @@ Sistema de restaurante para servidores de FiveM basado en QBCore;
 
 <h3 align="center">Sistema de cobros</h3>
 <p align="center">(pendiente de subir la captura 😅)</p>
+
+-----
+
+<p align="center">
+  <a href="https://kuroneko.im" target="_blank">
+    <img src="https://kuroneko.im/web/assets/images/profile.png" width="120">
+  </a>
+</p>
