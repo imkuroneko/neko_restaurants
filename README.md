@@ -31,6 +31,7 @@ Sistema de restaurante para servidores de FiveM basado en QBCore;
 - `qb-management`
 - `qb-banking (old)` o `Renewed-Banking`
 - `qb-phone` o `qs-smartphone`
+- `illenium-apearance`
 
 <br>
 
