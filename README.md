@@ -58,18 +58,32 @@ Sistema de restaurante para servidores de FiveM basado en QBCore;
 <h3 align="center">Sistema de garage</h3>
 <p align="center"><img src="https://github.com/imkuroneko/neko_restaurants/assets/20273059/23f53685-cc3a-4624-bff6-a09384944359"/></p>
 
-<h3 align="center">Sistema de items/crafteo (disponible para usar menú o tienda)</h3>
-<p align="center"><img src="https://github.com/imkuroneko/neko_restaurants/assets/20273059/c54f8639-9df3-431e-8b9a-8d85e1c26af6"/></p>
-<p align="center"><img src="https://github.com/imkuroneko/neko_restaurants/assets/20273059/06fa0b74-d53d-4968-bfd2-14b20b35603b"/></p>
+<h3 align="center">Puntos de alimentos y bebidas</h3>
+<table>
+    <tr> <th> Lista de items </th> <th> Tienda </th> </tr>
+    <tr>
+        <td> <img src="https://github.com/imkuroneko/neko_restaurants/assets/20273059/0d67c495-22d3-4844-af32-705ae667410a" alt="Lista de items"/> </td>
+        <td> <img src="https://github.com/imkuroneko/neko_restaurants/assets/20273059/0f042b1f-4c39-43ca-bd68-4ce8166a1346" alt="Tienda"/> </td>
+    </tr>
+</table>
 
-<h3 align="center">Stash mostrador</h3>
-<p align="center"><img src="https://github.com/imkuroneko/neko_restaurants/assets/20273059/838ba6a4-9972-43a3-8293-1a4ec3e0ad12"/></p>
-
-<h3 align="center">Stash inventario</h3>
-<p align="center"><img src="https://github.com/imkuroneko/neko_restaurants/assets/20273059/692b781c-7a4c-4431-affa-77b0a6df2c2d"/></p>
+<h3 align="center">Stashes</h3>
+<table>
+    <tr> <th> Inventario </th> <th> Mostrador </th> </tr>
+    <tr>
+        <td> <img src="https://github.com/imkuroneko/neko_restaurants/assets/20273059/2331b35e-1c74-46f8-ad48-ed9ef0fd4bda" alt="Stash inventario"/> </td>
+        <td> <img src="https://github.com/imkuroneko/neko_restaurants/assets/20273059/13184a2e-6d5e-47d9-94b2-54264a976274" alt="Stash mostrador"/> </td>
+    </tr>
+</table>
 
 <h3 align="center">Sistema de cobros</h3>
-<p align="center">(pendiente de subir la captura 😅)</p>
+<table>
+    <tr> <th> Vista empleado </th> <th> Vista cliente </th> </tr>
+    <tr>
+        <td> <img src="https://github.com/imkuroneko/neko_restaurants/assets/20273059/035024b2-23d1-4921-8ac6-baeea72d7a4b" alt="Vista empleado"/> </td>
+        <td> <img src="https://github.com/imkuroneko/neko_restaurants/assets/20273059/035024b2-23d1-4921-8ac6-baeea72d7a4b" alt="Vista cliente"/> </td>
+    </tr>
+</table>
 
 -----
 
