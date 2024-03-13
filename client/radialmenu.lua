@@ -120,8 +120,11 @@ end
 
 -- ===== Handler para menú de ropas <3
 RegisterNetEvent('neko_restaurants:client:openJobOutfitsMenu', function()
-    TriggerEvent("illenium-apearance:client:outfitsCommand", PlayerData.name)
+    QBCore.Functions.GetPlayerData(function(PlayerData)
+        TriggerEvent("illenium-apearance:client:outfitsCommand", PlayerData.name)
+    end)
 end)
+
 
 -- ===== Eventos a nivel FiveM
 AddEventHandler('playerSpawned', function(_)
