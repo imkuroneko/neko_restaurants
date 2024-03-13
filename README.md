@@ -88,7 +88,7 @@ Sistema de restaurante para servidores de FiveM basado en QBCore;
     <tr> <th> Vista empleado </th> <th> Vista cliente </th> </tr>
     <tr>
         <td> <img src="https://github.com/imkuroneko/neko_restaurants/assets/20273059/035024b2-23d1-4921-8ac6-baeea72d7a4b" alt="Vista empleado"/> </td>
-        <td> <img src="https://github.com/imkuroneko/neko_restaurants/assets/20273059/035024b2-23d1-4921-8ac6-baeea72d7a4b" alt="Vista cliente"/> </td>
+        <td> <img src="https://github.com/imkuroneko/neko_restaurants/assets/20273059/5cca8634-269f-4318-bf20-b30150e4929e" alt="Vista cliente"/> </td>
     </tr>
 </table>
 
