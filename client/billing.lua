@@ -75,56 +75,6 @@ RegisterNetEvent('neko_restaurants:billing:client:openBillingMenu', function(dat
 end)
 
 RegisterNetEvent('neko_restaurants:billing:client:popupBillMenu', function(billerId, ammount, jobName)
-    -- local elements = {
-    --     { label = " Factura Digital ", isHeader = true },
-    --     {
-    --         label = "<h4>Detalles:</h4>",
-    --         isHeader = true,
-    --         text = {
-    --             { text = "<b>Boleta:</b> " .. jobName .. "-00" .. tostring(math.random(1, 9)) .. "-0" .. tostring(math.random(1, 999)) .. "-00" .. tostring(math.random(213, 999)) .. "<br>" },
-    --             { text = "<b>Forma de Pago:</b> Transferencia<br>" },
-    --             { text = "<b>Importe a pagar:</b> $" .. ammount }
-    --         }
-    --     },
-    --     {
-    --         label = "Aceptar la factura",
-    --         icon = "fas fa-circle-check",
-    --         description = "Acepto el importe total para realizar el pago automático",
-    --         action = function()
-    --             TriggerServerEvent("neko_restaurants:billing:server:BillPlayer", { accept = 1, ammount = ammount, biller = billerId, job = jobName })
-    --         end
-    --     },
-    --     {
-    --         label = "Rechazar la factura",
-    --         icon = "fas fa-circle-xmark",
-    --         description = "Niego el importe total de la transacción",
-    --         action = function()
-    --             TriggerServerEvent("neko_restaurants:billing:server:BillPlayer", { accept = 0, ammount = ammount, biller = billerId, job = jobName })
-    --         end
-    --     }
-    -- }
-
-    local CraftMenu = {
-        id    = 'neko_restaurants_craft_options:'..jobName..':drink',
-        title = Config.i18n.foodCraftAreaLabel,
-        options = {}
-    }
-
-    for itemId, itemCod in pairs(commerceData.consumables.foods) do
-        table.insert(CraftMenu.options, {
-            title = itemNames[itemCod],
-            icon  = 'fas fa-fw fa-hamburger',
-            event = 'neko_restaurants:client:craftConsumable:'..itemCod:lower(),
-        })
-    end
-
-    lib.registerContext(CraftMenu)
-    lib.showContext(CraftMenu.id)
-
-
-
-
-
     exports['qb-menu']:openMenu({
         { isMenuHeader = true, header = "🧾 Factura Digital 🧾", txt = "" },
         {
