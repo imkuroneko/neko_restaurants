@@ -27,22 +27,20 @@ RegisterNetEvent('neko_restaurants:client:updateMenu', function()
         if ValidarUrlImgur(dialog.url) then
             TriggerServerEvent('neko_restaurants:server:updatemenu', dialog.url)
         else
-            QBCore.Functions.Notify("Solo se permiten imágenes subidas a imgur", 'error')
+            lib.notify({ description = 'Solo se permiten imágenes subidas a imgur', type = 'error' })
         end
     end
 end)
 
 RegisterNetEvent('neko_restaurants:client:listImagesMenu', function()
-    QBCore.Functions.TriggerCallback('neko_restaurants:server:getMenuImages', function(menuInfo)
-        for menuFaccion, menuUrl in pairs(menuInfo) do
-            if menuUrl ~= 'sin_url' then
-                RegisterNetEvent('neko_restaurants:client:showmenuimage:'..menuFaccion, function(urlMenu)
-                    TriggerEvent('animations:client:EmoteCommandStart', { "clipboard" })
-                    exports['ps-ui']:ShowImage(urlMenu)
-                end)
-            end
+    local menuInfo = lib.callback.await('neko_restaurants:server:getMenuImages', false)
+    for menuFaccion, menuUrl in pairs(menuInfo) do
+        if menuUrl ~= 'sin_url' then
+            RegisterNetEvent('neko_restaurants:client:showmenuimage:'..menuFaccion, function(urlMenu)
+                exports['ps-ui']:ShowImage(urlMenu)
+            end)
         end
-    end)
+    end
 end)
 
 TriggerEvent('neko_restaurants:client:listImagesMenu')

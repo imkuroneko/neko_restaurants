@@ -1,25 +1,28 @@
+local ox_inventory = exports.ox_inventory
 local listaJobs  = {}
 local listaItems = {}
+
+local foodItem   = Config.Settings.Crafting.foodItem
+local drinkItem  = Config.Settings.Crafting.drinkItem
+local itemsPrice = Config.Settings.Crafting.ItemsPrice
 
 for commerceId, commerceData in pairs(Config.Shops) do
     local jobName = commerceData.jobName
     listaJobs[jobName] = 0
 end
 
-if Config.Settings.Crafting.foodItem ~= '' and Config.Settings.Crafting.foodItem ~= nil then
-    table.insert(listaItems, { name = Config.Settings.Crafting.foodItem, price = Config.Settings.Crafting.ItemsPrice })
+if foodItem ~= '' and foodItem ~= nil then
+    table.insert(listaItems, { name = foodItem, price = itemsPrice })
 end
-if Config.Settings.Crafting.drinkItem ~= '' and Config.Settings.Crafting.drinkItem ~= nil then
-    table.insert(listaItems, { name = Config.Settings.Crafting.drinkItem, price = Config.Settings.Crafting.ItemsPrice })
+if drinkItem ~= '' and drinkItem ~= nil then
+    table.insert(listaItems, { name = drinkItem, price = itemsPrice })
 end
 
-if Config.Settings.Crafting.foodItem ~= '' and Config.Settings.Crafting.drinkItem ~= '' and Config.Settings.Crafting.foodItem ~= nil and Config.Settings.Crafting.drinkItem ~= nil then
-    exports.ox_inventory:RegisterShop('nekoRestaurantOxShop', {
+if foodItem ~= '' and drinkItem ~= '' and foodItem ~= nil and drinkItem ~= nil then
+    ox_inventory:RegisterShop('nekoRestaurantOxShop', {
         name = '🍪 Tienda de insumos',
         inventory = listaItems,
         locations = { Config.Settings.StoreCraftItems.targetZone },
         groups = listaJobs
     })
 end
-
--- alguna vez agregaremos el export de qb-shops :)

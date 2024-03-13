@@ -17,18 +17,17 @@ AddEventHandler('nekorestaurants:server:togglenotif_abierto', function()
     if listaJobs[Player.PlayerData.job.name] == nil then return end
 
     if not Player.PlayerData.job.onduty then
-        TriggerClientEvent('QBCore:Notify', src, 'Debes estar en servicio para enviar el anuncio', 'error')
+        TriggerClientEvent('ox_lib:notify', source, { description = 'Debes estar en servicio para enviar el anuncio', type = 'error' })
         return
     end
 
-    local jobInfo = Config.Shops[Player.PlayerData.job.name]
-    if not jobInfo.radialMenuStatus.enableOptions then return end
     local currentTime = GetGameTimer()
 
     if (currentTime - lastUsage) < cooldown then
-        TriggerClientEvent('QBCore:Notify', src, 'Debes esperar unos segundos mas para enviar el anuncio', 'error')
+        TriggerClientEvent('ox_lib:notify', source, { description = 'Debes esperar unos segundos mas para enviar el anuncio', type = 'error' })
         return
     end
+
 
     TriggerClientEvent('nekorestaurants:client:notif_abierto', -1, Player.PlayerData.job.name)
     lastUsage = currentTime
@@ -42,18 +41,17 @@ AddEventHandler('nekorestaurants:server:togglenotif_cerrado', function()
     if listaJobs[Player.PlayerData.job.name] == nil then return end
 
     if not Player.PlayerData.job.onduty then
-        TriggerClientEvent('QBCore:Notify', src, 'Debes estar en servicio para enviar el anuncio', 'error')
+        TriggerClientEvent('ox_lib:notify', source, { description = 'Debes estar en servicio para enviar el anuncio', type = 'error' })
         return
     end
 
-    local jobInfo = Config.Shops[Player.PlayerData.job.name]
-    if not jobInfo.radialMenuStatus.enableOptions then return end
     local currentTime = GetGameTimer()
 
     if (currentTime - lastUsage) < cooldown then
-        TriggerClientEvent('QBCore:Notify', src, 'Debes esperar unos segundos mas para enviar el anuncio', 'error')
+        TriggerClientEvent('ox_lib:notify', source, { description = 'Debes esperar unos segundos mas para enviar el anuncio', type = 'error' })
         return
     end
+
 
     TriggerClientEvent('nekorestaurants:client:notif_cerrado', -1, Player.PlayerData.job.name)
     lastUsage = currentTime

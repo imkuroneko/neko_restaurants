@@ -1,97 +1,131 @@
-local QBCore = exports["qb-core"]:GetCoreObject()
+local ox_inventory = exports.ox_inventory
+local foodItem  = Config.Settings.Crafting.foodItem
+local drinkItem = Config.Settings.Crafting.drinkItem
 
 CreateThread(function()
     -- ========= Crear eventos para el crafteo de consumibles
     for commerceId, commerceData in pairs(Config.Shops) do
-        for itemId, itemName in ipairs(commerceData.consumables.foods) do
-            local craftServerEvent = 'neko_restaurants:server:validateItems:'..itemName:lower()
-            QBCore.Functions.CreateCallback(craftServerEvent, function(source, cb)
-                local src = source
-                local Player = QBCore.Functions.GetPlayer(src)
-                if Config.Crafting.foodItem == '' then cb(true) end
-                if Player.Functions.GetItemByName(Config.Crafting.foodItem) == nil or Player.Functions.GetItemByName(Config.Crafting.foodItem).amount < 0 then
-                    cb(false)
-                end
-                cb(true)
-            end)
+        local jobName = commerceData.jobName
+        local stashes = commerceData.stashes
+        local consumables = commerceData.consumables
 
-            RegisterNetEvent('neko_restaurants:server:giveItem:'..itemName:lower(), function()
-                local Player = QBCore.Functions.GetPlayer(source)
-                if not Player then return end
-                Player.Functions.AddItem(itemName, 1)
-            end)
+        if Config.Settings.UseListMenu then
+            for itemId, itemName in ipairs(consumables.foods) do
+                local craftServerEvent = 'neko_restaurants:server:validateItems:'..itemName:lower()
+
+                lib.callback.register(craftServerEvent, function(source, cb)
+                    if foodItem == '' or foodItem == nil then return true end
+                    local items = ox_inventory:Search(source, 'count', { foodItem })
+                    if not items or items == 0 then
+                        return false
+                    end
+                    return true
+                end)
+
+                RegisterNetEvent('neko_restaurants:server:giveItem:'..itemName:lower(), function()
+                    ox_inventory:AddItem(source, itemName, 1)
+                end)
+            end
+
+            for itemId, itemName in ipairs(consumables.drinks) do
+                local craftServerEvent = 'neko_restaurants:server:validateItems:'..itemName:lower()
+
+                lib.callback.register(craftServerEvent, function(source, cb)
+                    if drinkItem == '' or drinkItem == nil then return true end
+                    local items = ox_inventory:Search(source, 'count', { drinkItem })
+                    if not items or items == 0 then
+                        return false
+                    end
+                    return true
+                end)
+
+                RegisterNetEvent('neko_restaurants:server:giveItem:'..itemName:lower(), function()
+                    ox_inventory:AddItem(source, itemName, 1)
+                end)
+            end
+        else
+            local foodCraftCoords = {}
+            local drinkCraftCoords = {}
+
+            for _k, data in ipairs(consumables.craftingArea) do
+                if data.type == 'food'  then table.insert(foodCraftCoords, data.coords) end
+                if data.type == 'drink' then table.insert(drinkCraftCoords, data.coords) end
+            end
+
+            local foodStoreName = 'neko_restaurants_'..jobName..'_food'
+            local itemsFoods = {}
+            for _k, foodData in ipairs(consumables.foods) do
+                if foodItem == '' or foodItem == nil then
+                    table.insert(itemsFoods, { name = foodData })
+                else
+                    table.insert(itemsFoods, { name = foodData, currency = foodItem, price = 1 })
+                end
+            end
+            ox_inventory:RegisterShop(foodStoreName, { groups = { [jobName] = 0 }, locations = foodCraftCoords, name = Config.i18n.foodCraftAreaLabel,  inventory = itemsFoods })
+
+            local drinkStoreName = 'neko_restaurants_'..jobName..'_drink'
+            local itemsDrinks = {}
+            for _k, drinkData in ipairs(consumables.drinks) do
+                if drinkItem == '' or drinkItem == nil then
+                    table.insert(itemsDrinks, { name = drinkData })
+                else
+                    table.insert(itemsDrinks, { name = drinkData, currency = drinkItem, price = 1 })
+                end
+            end
+            ox_inventory:RegisterShop(drinkStoreName, { groups = { [jobName] = 0 }, locations = drinkCraftCoords, name = Config.i18n.drinkCraftAreaLabel, inventory = itemsDrinks })
         end
 
-        for itemId, itemName in ipairs(commerceData.consumables.drinks) do
-            local craftServerEvent = 'neko_restaurants:server:validateItems:'..itemName:lower()
-            QBCore.Functions.CreateCallback(craftServerEvent, function(source, cb)
-                local src = source
-                local Player = QBCore.Functions.GetPlayer(src)
-                if Config.Crafting.drinkItem == '' then cb(true) end
-                if Player.Functions.GetItemByName(Config.Crafting.drinkItem) == nil or Player.Functions.GetItemByName(Config.Crafting.drinkItem).amount < 0 then
-                    cb(false)
-                end
-                cb(true)
-            end)
-
-            RegisterNetEvent('neko_restaurants:server:giveItem:'..itemName:lower(), function()
-                local Player = QBCore.Functions.GetPlayer(source)
-                if not Player then return end
-                Player.Functions.AddItem(itemName, 1)
-            end)
+        for stashId, stashData in ipairs(stashes.inventory) do
+            local jobName = commerceData.jobName
+            local Settings = Config.Settings.Stashes
+            CreateStash(
+                jobName..':refrigerador:'..stashId,
+                "Refrigerador "..stashId.." ("..jobName..")",
+                Settings.maxSlots,
+                Settings.maxWeight,
+                { [commerceData.jobName] = 0 },
+                stashData.coords
+            )
         end
 
-        if Config.Settings.Inventory == 'ox_inventory' then
-            for stashId, stashData in ipairs(commerceData.stashes.inventory) do
-                CreateStash(
-                    commerceData.jobName..':refrigerador:'..stashId,
-                    "Refrigerador "..stashId.." ("..commerceData.jobName..")",
-                    Config.Settings.Stashes.maxSlots,
-                    Config.Settings.Stashes.maxWeight,
-                    { [commerceData.jobName] = 0 },
-                    stashData.coords
-                )
-            end
+        for stashId, stashData in ipairs(stashes.bar) do
+            local jobName = commerceData.jobName
+            local Settings = Config.Settings.Stashes
+            CreateStash(
+                jobName..':TrayMostrador:'..stashId,
+                "Bandeja del Mostrador "..stashId.." ("..jobName..")",
+                Settings.maxSlots,
+                Settings.maxWeight,
+                nil,
+                stashData.coords
+            )
+        end
 
-            for stashId, stashData in ipairs(commerceData.stashes.bar) do
-                CreateStash(
-                    commerceData.jobName..':TrayMostrador:'..stashId,
-                    "Bandeja del Mostrador "..stashId.." ("..commerceData.jobName..")",
-                    Config.Settings.Stashes.maxSlots,
-                    Config.Settings.Stashes.maxWeight,
-                    nil,
-                    stashData.coords
-                )
-            end
-
-            for stashId, stashData in ipairs(commerceData.stashes.tables) do
-                CreateStash(
-                    commerceData.jobName..':TrayClientes:'..stashId,
-                    "Bandeja de la Mesa "..stashId.." ("..commerceData.jobName..")",
-                    Config.Settings.Stashes.maxSlots,
-                    Config.Settings.Stashes.maxWeight,
-                    nil,
-                    stashData.coords
-                )
-            end
+        for stashId, stashData in ipairs(stashes.tables) do
+            local jobName = commerceData.jobName
+            local Settings = Config.Settings.Stashes
+            CreateStash(
+                jobName..':TrayClientes:'..stashId,
+                "Bandeja de la Mesa "..stashId.." ("..jobName..")",
+                Settings.maxSlots,
+                Settings.maxWeight,
+                nil,
+                stashData.coords
+            )
         end
     end
 end)
 
 RegisterNetEvent('neko_restaurants:server:remove_food_ingredients', function()
-    local Player = QBCore.Functions.GetPlayer(source)
-    if not Player then return end
-    if Config.Crafting.foodItem == '' then return end
-    Player.Functions.RemoveItem(Config.Crafting.foodItem, 1)
+    if foodItem == '' or foodItem == nil then return end
+    ox_inventory:RemoveItem(source, foodItem, 1)
 end)
 
 RegisterNetEvent('neko_restaurants:server:remove_drink_ingredients', function()
-    local Player = QBCore.Functions.GetPlayer(source)
-    if not Player then return end
-    if Config.Crafting.drinkItem == '' then return end
-    Player.Functions.RemoveItem(Config.Crafting.drinkItem, 1)
+    if drinkItem == '' or drinkItem == nil then return end
+    ox_inventory:RemoveItem(source, drinkItem, 1)
 end)
 
 function CreateStash(id, label, slots, maxWeight, groups, coords)
-    exports.ox_inventory:RegisterStash(id, label, slots, maxWeight, nil, groups, coords)
+    ox_inventory:RegisterStash(id, label, slots, maxWeight, nil, groups, coords)
 end

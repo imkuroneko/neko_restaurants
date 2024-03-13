@@ -14,7 +14,7 @@ for commerceId, commerceData in pairs(Config.Shops) do
     listaJobs[jobName] = 0
 end
 
-RegisterNetEvent('neko_billing:server:sendBill', function(billedID, ammount, jobName)
+RegisterNetEvent('neko_restaurants:billing:server:sendBill', function(billedID, ammount, jobName)
     local src = source
     local biller = QBCore.Functions.GetPlayer(src)
     local billed = QBCore.Functions.GetPlayer(tonumber(billedID))
@@ -25,33 +25,33 @@ RegisterNetEvent('neko_billing:server:sendBill', function(billedID, ammount, job
                 if tonumber(ammount) and tonumber(ammount) > 0 then
                     local balance = billed.Functions.GetMoney('bank')
                     if balance < tonumber(ammount) then
-                        TriggerClientEvent('QBCore:Notify', src, "El cliente no tiene el importe suficiente para pagar.", 'error')
-                        TriggerClientEvent('QBCore:Notify', tonumber(billedID), "No tienes suficiente dinero para pagar de esta forma.", 'error')
+                        TriggerClientEvent('ox_lib:notify', src, { description = 'El cliente no tiene el importe suficiente para pagar', type = 'error' })
+                        TriggerClientEvent('ox_lib:notify', tonumber(billedID), { description = 'No tienes suficiente dinero para pagar la factura', type = 'error' })
                         return
                     end
-                    TriggerClientEvent('neko_billing:client:popupBillMenu', tonumber(billedID), src, tonumber(ammount), jobName)
+                    TriggerClientEvent('neko_restaurants:billing:client:popupBillMenu', tonumber(billedID), src, tonumber(ammount), jobName)
                 else
-                    TriggerClientEvent('QBCore:Notify', src, "No puedes emitir facturas de $0.", 'error')
+                    TriggerClientEvent('ox_lib:notify', src, { description = 'No puedes emitir facturas de $0', type = 'error' })
                 end
             else
-                TriggerClientEvent('QBCore:Notify', src, "No te puedes enviar facturas a ti mismo.", 'error')
+                TriggerClientEvent('ox_lib:notify', src, { description = 'No te puedes enviar facturas a ti mismo', type = 'error' })
             end
         else
-            TriggerClientEvent('QBCore:Notify', src, "El cliente indicado no se encuentra en la ciudad.", 'error')
+            TriggerClientEvent('ox_lib:notify', src, { description = 'El cliente indicado no se encuentra en la ciudad', type = 'error' })
         end
     else
-        TriggerClientEvent('QBCore:Notify', src, "Esta facción no puede emitir facturas.", 'error')
+        TriggerClientEvent('ox_lib:notify', src, { description = 'Esta facción no puede emitir facturas', type = 'error' })
     end
 end)
 
-RegisterNetEvent('neko_billing:server:BillPlayer', function(data)
+RegisterNetEvent('neko_restaurants:billing:server:BillPlayer', function(data)
     if listaJobs[data.job] ~= nil then
         if data.accept == 1 then
             local biller = QBCore.Functions.GetPlayer(data.biller)
             local billed = QBCore.Functions.GetPlayer(source)
 
             if Config.Shops[data.job].comissionPerSale == nil or Config.Shops[data.job].comissionPerSale == 0 then
-                billed.Functions.RemoveMoney('bank', data.ammount, "neko_billing:payedInvoice")
+                billed.Functions.RemoveMoney('bank', data.ammount, "neko_restaurants:billing:payedInvoice")
 
                 if Config.Settings.Management == 'qb-management' then
                     exports['qb-management']:AddMoney(data.job, data.ammount)
@@ -79,8 +79,8 @@ RegisterNetEvent('neko_billing:server:BillPlayer', function(data)
                 local sellerComission = round(data.ammount * ( Config.Shops[data.job].comissionPerSale / 100 ))
                 local jobMoney = data.ammount - sellerComission
 
-                billed.Functions.RemoveMoney('bank', data.ammount, "neko_billing:payedInvoice")
-                biller.Functions.AddMoney('bank', sellerComission, "neko_billing:comission")
+                billed.Functions.RemoveMoney('bank', data.ammount, "neko_restaurants:billing:payedInvoice")
+                biller.Functions.AddMoney('bank', sellerComission, "neko_restaurants:billing:comission")
 
                 if Config.Settings.Management == 'qb-management' then
                     exports['qb-management']:AddMoney(data.job, jobMoney)
@@ -114,16 +114,16 @@ end)
 
 -- QBCore.Functions.CreateUseableItem("billmachine", function(source, item)
 --     local src = source
---     TriggerClientEvent("neko_billing:client:usebillmachine", src)
+--     TriggerClientEvent("neko_restaurants:billing:client:usebillmachine", src)
 -- end)
 
 
 function SendErrorNotify(source, message)
-    TriggerClientEvent('QBCore:Notify', source, message, 'error')
+    TriggerClientEvent('ox_lib:notify', source, { description = message, type = 'error' })
 end
 
 function SendSucessNotify(source, message)
-    TriggerClientEvent('QBCore:Notify', source, message, 'success')
+    TriggerClientEvent('ox_lib:notify', source, { description = message, type = 'success' })
 end
 
 function SendEmail(citizenId, Sender, Subject, Message)

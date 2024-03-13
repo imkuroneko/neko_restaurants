@@ -79,24 +79,26 @@ CreateThread(function()
             -- === Crear Eventos
             RegisterNetEvent(eventGetVehicle, function()
                 for i = 1, #listaVehs do
-                    local MenuOptions = {
-                        { header = "Vehículos Disponibles", isMenuHeader = true },
+                    local MenuOptionsVeh = {
+                        id    = 'neko_restaurants_vehicles_options:'..commerceId,
+                        title = 'Garage de Facción',
+                        options = {}
                     }
 
                     for k, v in pairs(listaVehs) do
-                        MenuOptions[#MenuOptions + 1] = {
-                            header = v.name,
-                            params = {
-                                event = "neko_restaurants:client:garage:spawnvehicle",
-                                args = {
-                                    id = v.model,
-                                    cs = commerceData.vehiclesMenu.spawnCoords,
-                                    pf = commerceData.vehiclesMenu.patentPrefix
-                                }
+                        table.insert(MenuOptionsVeh.options, {
+                            title = v.name,
+                            event = 'neko_restaurants:client:garage:spawnvehicle',
+                            args  = {
+                                id = v.model,
+                                cs = commerceData.vehiclesMenu.spawnCoords,
+                                pf = commerceData.vehiclesMenu.patentPrefix
                             }
-                        }
+                        })
                     end
-                    exports['qb-menu']:openMenu(MenuOptions)
+
+                    lib.registerContext(MenuOptionsVeh)
+                    lib.showContext(MenuOptionsVeh.id)
                 end
             end)
 
@@ -109,10 +111,10 @@ CreateThread(function()
                         DeleteVehicle(car)
                         DeleteEntity(car)
                     else
-                        QBCore.Functions.Notify("Este vehículo no es de tu trabajo", "error")
+                        lib.notify({ description = 'Este vehículo no es de tu trabajo', type = 'error' })
                     end
                 else
-                    QBCore.Functions.Notify("No veo el vehículo, asegurate haberlo dejado cerca", "error")
+                    lib.notify({ description = 'No veo el vehículo, asegurate haberlo dejado cerca', type = 'error' })
                 end
             end)
         end

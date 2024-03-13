@@ -6,9 +6,10 @@ author 'KuroNeko'
 
 lua54 'yes'
 
-version '2.2'
+version '2.3'
 
 shared_scripts {
+    '@ox_lib/init.lua',
     'config.lua',
 }
 
@@ -39,5 +40,6 @@ ui_page 'html/index.html'
 
 files {
     'html/index.html',
+    'html/style.css',
     'html/notif.mp3',
 }

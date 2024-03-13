@@ -30,6 +30,12 @@ function CreateMenu(PlayerData)
     if GetResourceState('qb-radialmenu') ~= "started" then return end
     DeleteMenu()
 
+    if PlayerData == nil then
+        QBCore.Functions.GetPlayerData(function(data)
+            PlayerData = data.job
+        end)
+    end
+
     if PlayerData == nil or listaJobs[PlayerData.name] == nil or not PlayerData.onduty then
         return -- no necesitamos crearle menú a este job
     end
@@ -40,42 +46,63 @@ function CreateMenu(PlayerData)
         icon = 'mug-hot',
         items = {
             {
-                id = 'nekorestaurants_updatemenu',
-                title = 'Actualizar Menú',
+                id = 'nekorestaurants_menumanager',
+                title = 'Carta',
                 icon = 'clipboard',
-                type = 'client',
-                event = 'neko_restaurants:client:updateMenu',
-                shouldClose = true
+                items = {
+                    {
+                        id = 'nekorestaurants_updatemenu',
+                        title = 'Actualizar Menú',
+                        icon = 'clipboard',
+                        type = 'client',
+                        event = 'neko_restaurants:client:updateMenu',
+                        shouldClose = true
+                    },
+                    {
+                        id = 'nekorestaurants_getmenu',
+                        title = 'Obtener Menú',
+                        icon = 'copy',
+                        type = 'server',
+                        event = 'neko_restaurants:server:giveitem_restaurantmenu',
+                        shouldClose = true
+                    },
+                }
             },
             {
-                id = 'nekorestaurants_getmenu',
-                title = 'Obtener Menú',
-                icon = 'copy',
+                id = 'nekorestaurants_avisos',
+                title = 'Enviar Anuncio',
+                icon = 'business-time',
                 type = 'server',
-                event = 'neko_restaurants:server:giveitem_restaurantmenu',
+                event = 'nekorestaurants:server:togglenotif_abierto',
+                items = {
+                    {
+                        id = 'nekorestaurants_aviso_abierto',
+                        title = 'Abierto',
+                        icon = 'business-time',
+                        type = 'server',
+                        event = 'nekorestaurants:server:togglenotif_abierto',
+                        shouldClose = true
+                    },
+                    {
+                        id = 'nekorestaurants_aviso_cerrado',
+                        title = 'Cerrado',
+                        icon = 'business-time',
+                        type = 'server',
+                        event = 'nekorestaurants:server:togglenotif_cerrado',
+                        shouldClose = true
+                    }
+                }
+            },
+            {
+                id = 'nekorestaurants_vestido',
+                title = 'Vestidor',
+                icon = 'shirt',
+                type = 'client',
+                event = 'neko_restaurants:client:openJobOutfitsMenu',
                 shouldClose = true
-            }
+            },
         }
     }
-
-    if Config.Shops[PlayerData.name].radialMenuStatus.enableOptions then
-        table.insert(menu.items, {
-            id = 'nekorestaurants_aviso_abierto',
-            title = 'Anuncio abierto',
-            icon = 'business-time',
-            type = 'server',
-            event = 'nekorestaurants:server:togglenotif_abierto',
-            shouldClose = true,
-        })
-        table.insert(menu.items, {
-            id = 'nekorestaurants_aviso_cerrado',
-            title = 'Anuncio cerrado',
-            icon = 'business-time',
-            type = 'server',
-            event = 'nekorestaurants:server:togglenotif_cerrado',
-            shouldClose = true,
-        })
-    end
 
     if PlayerData.isboss then
         table.insert(menu.items, {
@@ -90,6 +117,11 @@ function CreateMenu(PlayerData)
 
     menuID = exports['qb-radialmenu']:AddOption(menu)
 end
+
+-- ===== Handler para menú de ropas <3
+RegisterNetEvent('neko_restaurants:client:openJobOutfitsMenu', function()
+    TriggerEvent("illenium-apearance:client:outfitsCommand", PlayerData.name)
+end)
 
 -- ===== Eventos a nivel FiveM
 AddEventHandler('playerSpawned', function(_)

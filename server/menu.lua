@@ -10,7 +10,7 @@ RegisterServerEvent('neko_restaurants:server:updatemenu', function(url)
     end
 
     if not hasPermission then
-        TriggerClientEvent('QBCore:Notify', source, "No tienes permiso para ejecutar este comando", 'error')
+        TriggerClientEvent('ox_lib:notify', source, { description = 'No tienes permiso para ejecutar este comando', type = 'error' })
     end
 
     exports.oxmysql:execute([[
@@ -28,10 +28,10 @@ RegisterServerEvent('neko_restaurants:server:updatemenu', function(url)
     })
 
     TriggerClientEvent('neko_restaurants:client:listImagesMenu', source)
-    TriggerClientEvent('QBCore:Notify', source, 'Se ha actualizado el menú correctamente', 'success')
+    TriggerClientEvent('ox_lib:notify', source, { description = 'Se ha actualizado el menú correctamente', type = 'success' })
 end)
 
-QBCore.Functions.CreateCallback('neko_restaurants:server:getMenuImages', function(source, cb)
+lib.callback.register('neko_restaurants:server:getMenuImages', function(source, cb)
     -- recuperar datos de la base de datos
     local result = MySQL.query.await(" SELECT job, url FROM neko_restaurants_menu ; ", {})
 
@@ -59,7 +59,7 @@ QBCore.Functions.CreateCallback('neko_restaurants:server:getMenuImages', functio
         end)
     end
 
-    cb(images)
+    return images
 end)
 
 RegisterNetEvent('neko_restaurants:server:giveitem_restaurantmenu', function()
@@ -75,7 +75,7 @@ RegisterNetEvent('neko_restaurants:server:giveitem_restaurantmenu', function()
     end
 
     if not HasPermission then
-        TriggerClientEvent('QBCore:Notify', source, "No tienes permiso para ejecutar este comando", 'error')
+        TriggerClientEvent('ox_lib:notify', source, { description = 'No tienes permiso para ejecutar este comando', type = 'error' })
     end
 
     Player.Functions.AddItem('menu_'..JobName, 1)

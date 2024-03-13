@@ -26,7 +26,7 @@ Citizen.CreateThread(function()
         options = {
             {
                 type  = "client",
-                event = "neko_billing:client:openBillingMenu",
+                event = "neko_restaurants:billing:client:openBillingMenu",
                 icon  = 'fa-solid fa-receipt',
                 label = 'Enviar Factura',
                 canInteract = function(entity, distance, data)
@@ -42,7 +42,7 @@ Citizen.CreateThread(function()
 end)
 
 
-RegisterNetEvent('neko_billing:client:openBillingMenu', function(data)
+RegisterNetEvent('neko_restaurants:billing:client:openBillingMenu', function(data)
     -- Target
     local playerTarget = GetNearestPlayerToEntity(data.entity)
     local billedId     = GetPlayerServerId(playerTarget)
@@ -63,21 +63,71 @@ RegisterNetEvent('neko_billing:client:openBillingMenu', function(data)
             })
             if bill ~= nil then
                 if bill.ammount == nil then return false end
-                TriggerServerEvent("neko_billing:server:sendBill", billedId, bill.ammount, jobName)
-                QBCore.Functions.Notify("Se ha enviado la factura al cliente", "success")
+                TriggerServerEvent("neko_restaurants:billing:server:sendBill", billedId, bill.ammount, jobName)
+                lib.notify({ description = 'La factura se envió al cliente', type = 'success' })
             end
         else
-            QBCore.Functions.Notify("No puedes utilizarlo estando fuera de servicio", "error")
+            lib.notify({ description = 'Debes estar en servicio para emitir facturas', type = 'error' })
         end
     else
-        QBCore.Functions.Notify("No eres un empleado autorizado para operar este equipo", "error")
+        lib.notify({ description = 'No eres empleado de un comercio para emitir facturas', type = 'error' })
     end
 end)
 
-RegisterNetEvent('neko_billing:client:popupBillMenu', function(billerId, ammount, jobName)
+RegisterNetEvent('neko_restaurants:billing:client:popupBillMenu', function(billerId, ammount, jobName)
+    -- local elements = {
+    --     { label = " Factura Digital ", isHeader = true },
+    --     {
+    --         label = "<h4>Detalles:</h4>",
+    --         isHeader = true,
+    --         text = {
+    --             { text = "<b>Boleta:</b> " .. jobName .. "-00" .. tostring(math.random(1, 9)) .. "-0" .. tostring(math.random(1, 999)) .. "-00" .. tostring(math.random(213, 999)) .. "<br>" },
+    --             { text = "<b>Forma de Pago:</b> Transferencia<br>" },
+    --             { text = "<b>Importe a pagar:</b> $" .. ammount }
+    --         }
+    --     },
+    --     {
+    --         label = "Aceptar la factura",
+    --         icon = "fas fa-circle-check",
+    --         description = "Acepto el importe total para realizar el pago automático",
+    --         action = function()
+    --             TriggerServerEvent("neko_restaurants:billing:server:BillPlayer", { accept = 1, ammount = ammount, biller = billerId, job = jobName })
+    --         end
+    --     },
+    --     {
+    --         label = "Rechazar la factura",
+    --         icon = "fas fa-circle-xmark",
+    --         description = "Niego el importe total de la transacción",
+    --         action = function()
+    --             TriggerServerEvent("neko_restaurants:billing:server:BillPlayer", { accept = 0, ammount = ammount, biller = billerId, job = jobName })
+    --         end
+    --     }
+    -- }
+
+    local CraftMenu = {
+        id    = 'neko_restaurants_craft_options:'..jobName..':drink',
+        title = Config.i18n.foodCraftAreaLabel,
+        options = {}
+    }
+
+    for itemId, itemCod in pairs(commerceData.consumables.foods) do
+        table.insert(CraftMenu.options, {
+            title = itemNames[itemCod],
+            icon  = 'fas fa-fw fa-hamburger',
+            event = 'neko_restaurants:client:craftConsumable:'..itemCod:lower(),
+        })
+    end
+
+    lib.registerContext(CraftMenu)
+    lib.showContext(CraftMenu.id)
+
+
+
+
+
     exports['qb-menu']:openMenu({
-		{ isMenuHeader = true, header = "🧾 Factura Digital 🧾", txt = "" },
-		{
+        { isMenuHeader = true, header = "🧾 Factura Digital 🧾", txt = "" },
+        {
             isMenuHeader = true,
             header = "<h4>Detalles:</h4>",
             txt =
@@ -85,23 +135,23 @@ RegisterNetEvent('neko_billing:client:popupBillMenu', function(billerId, ammount
                 "<b>Forma de Pago:</b> Transferencia<br>"..
                 "<b>Importe a pagar:</b> $"..ammount
         },
-		{
+        {
             icon = "fas fa-circle-check",
             header = "Aceptar la factura",
             txt = "Acepto el importe total para realizar el pago automático",
             params = {
                 isServer = true,
-                event = "neko_billing:server:BillPlayer",
+                event = "neko_restaurants:billing:server:BillPlayer",
                 args = { accept = 1, ammount = ammount, biller = billerId, job = jobName }
             }
         },
-		{
+        {
             icon = "fas fa-circle-xmark",
             header = "Rechazar la factura",
             txt = "Niego el importe total de la transacción",
             params = {
                 isServer = true,
-                event = "neko_billing:server:BillPlayer",
+                event = "neko_restaurants:billing:server:BillPlayer",
                 args = { accept = 0, ammount = ammount, biller = billerId, job = jobName }
             }
         }

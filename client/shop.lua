@@ -1,4 +1,6 @@
 local QBCore = exports["qb-core"]:GetCoreObject()
+local ox_inventory = exports.ox_inventory
+
 PlayerJob = nil
 local listaJobs  = {}
 
@@ -42,7 +44,6 @@ CreateThread(function()
                         event = "neko_restaurants:client:openStore",
                         icon = "fas fa-shopping-basket",
                         label = "Abrir tienda",
-                        -- job = listaJobs
                         canInteract = function(entity, distance, data)
                             if PlayerJob == nil then return false end
                             if listaJobs[PlayerJob.name] == nil or not PlayerJob.onduty then return false end -- no usar si no tenemos el job o estamos fuera de servicio
@@ -58,12 +59,12 @@ end)
 
 RegisterNetEvent('neko_restaurants:client:openStore', function()
     if listaJobs[PlayerJob.name] == nil then
-        QBCore.Functions.Notify('No tienes permitido acceder a esta tienda', 'error')
+        lib.notify({ description = 'No tienes un empleo habilitado para acceder a esta tienda', type = 'error' })
     else
         if not PlayerJob.onduty then
-            QBCore.Functions.Notify('No te encuentras en servicio', 'error')
+            lib.notify({ description = 'No te encuentras en servicio', type = 'error' })
         else
-            exports.ox_inventory:openInventory( 'shop', { type = 'nekoRestaurantOxShop', id = 1 })
+            ox_inventory:openInventory('shop', { type = 'nekoRestaurantOxShop', id = 1 })
         end
     end
 end)
