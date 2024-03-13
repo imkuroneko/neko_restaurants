@@ -42,11 +42,6 @@ Sistema de restaurante para servidores de FiveM basado en QBCore;
 
 <br>
 
-### 📋 WIP
-- [ ] Cambiar funcionalidad de facturación
-
-<br>
-
 > [!NOTE]
 > La mayor parte del proyecto ahora se encuentra funcionando gracias a **ox_lib** y **ox_inventory**; El soporte para otros sistemas de inventario se han removido y se estará trabajando para llegar al mayor porcentaje de uso de las funciones de **ox_lib** para su facil migración a otros frameworks
 
