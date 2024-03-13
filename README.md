@@ -11,11 +11,12 @@ Sistema de restaurante para servidores de FiveM basado en QBCore;
 - Sistema de garage.
 - Sistema de anuncios abierto/cerrado. _(basado en `Manu-JobNotifications`)_
 
----
+<br>
 
-### Dependencias
+### 📦 Dependencias
 - `oxmysql`
-- `qb-inventory` o `ox_inventory`
+- `ox_lib`
+- `ox_inventory`
 - `ps-ui`
 - `qb-radialmenu`
 - `qb-input`
@@ -24,24 +25,34 @@ Sistema de restaurante para servidores de FiveM basado en QBCore;
 - `qb-banking (old)` o `Renewed-Banking`
 - `qb-phone` o `qs-smartphone`
 
----
+<br>
 
-### Detalles
-- Todos los items deben estar registrados en `qb-core/shared/items.lua` (para obtener el nombre) e `ox_inventory/data/items.lua` (de usar este inventario)
+### 🦄 Detalles
+- Todos los items deben estar registrados en `ox_inventory/data/items.lua` (de usar este inventario)
 - Los items de menú deben tener el nombre de `menu_{nombrefaccion}` (ej: `menu_pizzeria`)
-- Los items para craftear la comida o bebida (setear como `''` si no se utilizará)
+- Los items para craftear la comida o bebida (se pueden setear como `''` o `false` si no se utilizará)
 
----
+<br>
+
+### 📋 WIP
+- [ ] Cambiar funcionalidad de facturación
+
+<br>
+
+> [!NOTE]
+> La mayor parte del proyecto ahora se encuentra funcionando gracias a **ox_lib** y **ox_inventory**; El soporte para otros sistemas de inventario se han removido y se estará trabajando para llegar al mayor porcentaje de uso de las funciones de **ox_lib** para su facil migración a otros frameworks
+
+<br>
 
 <h3 align="center">Sistema de acciones (qb-radialmenu)</h3>
-<p align="center"><img src="https://github.com/imkuroneko/neko_restaurants/assets/20273059/3d90091c-3878-4df0-acac-8262b4e1951b"/></p>
+<p align="center"><img src="https://github.com/imkuroneko/neko_restaurants/assets/20273059/781bf0cc-5e54-4688-8ddf-41f991d1bf2e"/></p>
 
 <h3 align="center">Sistema de garage</h3>
 <p align="center"><img src="https://github.com/imkuroneko/neko_restaurants/assets/20273059/23f53685-cc3a-4624-bff6-a09384944359"/></p>
 
-<h3 align="center">Sistema de items/crafteo</h3>
-<p align="center"><img src="https://github.com/imkuroneko/neko_restaurants/assets/20273059/bbe253f4-b343-45ba-bb1c-8cb1f6a94ddf"/></p>
-<p align="center"><img src="https://github.com/imkuroneko/neko_restaurants/assets/20273059/f05123b5-7483-46cf-b69e-3d5526bf43df"/></p>
+<h3 align="center">Sistema de items/crafteo (disponible para usar menú o tienda)</h3>
+<p align="center"><img src="https://github.com/imkuroneko/neko_restaurants/assets/20273059/c54f8639-9df3-431e-8b9a-8d85e1c26af6"/></p>
+<p align="center"><img src="https://github.com/imkuroneko/neko_restaurants/assets/20273059/06fa0b74-d53d-4968-bfd2-14b20b35603b"/></p>
 
 <h3 align="center">Stash mostrador</h3>
 <p align="center"><img src="https://github.com/imkuroneko/neko_restaurants/assets/20273059/838ba6a4-9972-43a3-8293-1a4ec3e0ad12"/></p>
