@@ -14,22 +14,23 @@ for commerceId, commerceData in pairs(Config.Shops) do
     listaJobs[jobName] = 0
 end
 
-RegisterNetEvent('neko_restaurants:billing:server:sendBill', function(billedID, ammount, jobName)
+RegisterNetEvent('neko_restaurants:billing:server:sendBill', function(data)
     local src = source
     local biller = QBCore.Functions.GetPlayer(src)
-    local billed = QBCore.Functions.GetPlayer(tonumber(billedID))
+    local billed = QBCore.Functions.GetPlayer(tonumber(data.cliente))
 
-    if listaJobs[jobName] ~= nil then
+    if listaJobs[data.faccion] ~= nil then
         if billed ~= nil then
             if biller.PlayerData.citizenid ~= billed.PlayerData.citizenid then
-                if tonumber(ammount) and tonumber(ammount) > 0 then
+                if tonumber(data.importe) and tonumber(data.importe) > 0 then
                     local balance = billed.Functions.GetMoney('bank')
-                    if balance < tonumber(ammount) then
+                    if balance < tonumber(data.importe) then
                         TriggerClientEvent('ox_lib:notify', src, { description = 'El cliente no tiene el importe suficiente para pagar', type = 'error' })
-                        TriggerClientEvent('ox_lib:notify', tonumber(billedID), { description = 'No tienes suficiente dinero para pagar la factura', type = 'error' })
-                        return
+                        TriggerClientEvent('ox_lib:notify', tonumber(data.cliente), { description = 'No tienes suficiente dinero para pagar la factura', type = 'error' })
+                    else
+                        TriggerClientEvent('neko_restaurants:billing:client:popupBillMenu', tonumber(data.cliente), src, tonumber(data.importe), data.concepto, data.faccion)
+                        TriggerClientEvent('ox_lib:notify', src, { description = 'Se envió la factura al cliente', type = 'success' })
                     end
-                    TriggerClientEvent('neko_restaurants:billing:client:popupBillMenu', tonumber(billedID), src, tonumber(ammount), jobName)
                 else
                     TriggerClientEvent('ox_lib:notify', src, { description = 'No puedes emitir facturas de $0', type = 'error' })
                 end
@@ -111,12 +112,6 @@ RegisterNetEvent('neko_restaurants:billing:server:BillPlayer', function(data)
         end
     end
 end)
-
--- QBCore.Functions.CreateUseableItem("billmachine", function(source, item)
---     local src = source
---     TriggerClientEvent("neko_restaurants:billing:client:usebillmachine", src)
--- end)
-
 
 function SendErrorNotify(source, message)
     TriggerClientEvent('ox_lib:notify', source, { description = message, type = 'error' })
