@@ -26,7 +26,6 @@ Sistema de restaurante para servidores de FiveM basado en QBCore;
 - `ox_inventory`
 - `ps-ui`
 - `qb-radialmenu`
-- `qb-input`
 - `qb-target`
 - `qb-management`
 - `qb-banking (old)` o `Renewed-Banking`
@@ -39,11 +38,13 @@ Sistema de restaurante para servidores de FiveM basado en QBCore;
 - Todos los items deben estar registrados en `ox_inventory/data/items.lua` (de usar este inventario)
 - Los items de menú deben tener el nombre de `menu_{nombrefaccion}` (ej: `menu_pizzeria`)
 - Los items para craftear la comida o bebida (se pueden setear como `''` o `false` si no se utilizará)
+- Todos los textos se encuentran en `locales/es.json` por si desees agregar otros idiomas o modificar algo a tu gusto.
 
 <br>
 
 > [!NOTE]
-> La mayor parte del proyecto ahora se encuentra funcionando gracias a **ox_lib** y **ox_inventory**; El soporte para otros sistemas de inventario se han removido y se estará trabajando para llegar al mayor porcentaje de uso de las funciones de **ox_lib** para su facil migración a otros frameworks
+> - El proyecto utiliza el sistema de traducciones de **ox_lib**, para que funcione deberás agregar en tu archivo `.cfg` lo siguiente: `setr ox:locale es`
+> - La mayor parte del proyecto ahora se encuentra funcionando gracias a **ox_lib** y **ox_inventory**; El soporte para otros sistemas de inventario se han removido y se estará trabajando para llegar al mayor porcentaje de uso de las funciones de **ox_lib** para su facil adaptación a otros frameworks
 
 <br>
 
