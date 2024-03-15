@@ -1,3 +1,4 @@
+lib.locale()
 local QBCore = exports["qb-core"]:GetCoreObject()
 local ox_inventory = exports.ox_inventory
 
@@ -43,7 +44,7 @@ CreateThread(function()
                         type = "client",
                         event = "neko_restaurants:client:openStore",
                         icon = "fas fa-shopping-basket",
-                        label = "Abrir tienda",
+                        label = locale('store__target_label'),
                         canInteract = function(entity, distance, data)
                             if PlayerJob == nil then return false end
                             if listaJobs[PlayerJob.name] == nil or not PlayerJob.onduty then return false end -- no usar si no tenemos el job o estamos fuera de servicio
@@ -59,10 +60,10 @@ end)
 
 RegisterNetEvent('neko_restaurants:client:openStore', function()
     if listaJobs[PlayerJob.name] == nil then
-        lib.notify({ description = 'No tienes un empleo habilitado para acceder a esta tienda', type = 'error' })
+        lib.notify({ description = locale('store__not_available'), type = 'error' })
     else
         if not PlayerJob.onduty then
-            lib.notify({ description = 'No te encuentras en servicio', type = 'error' })
+            lib.notify({ description = locale('store__not_duty'), type = 'error' })
         else
             ox_inventory:openInventory('shop', { type = 'nekoRestaurantOxShop', id = 1 })
         end

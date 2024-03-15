@@ -1,0 +1,92 @@
+{
+    "announce__not_on_duty" : "Debes estar en servicio para enviar el anuncio",
+    "announce__wait_seconds" : "Debes esperar unos segundos mas para enviar el anuncio",
+
+    "billing__client_no_enough_money" : "El cliente no tiene el importe suficiente para pagar",
+    "billing__you_has_no_money" : "No tienes suficiente dinero para pagar la factura",
+    "billing__invoice_sent" : "Se envió la factura al cliente",
+    "billing__no_invoice_0" : "No puedes emitir facturas de $0",
+    "billing__no_invoice_yourself" : "No te puedes enviar facturas a ti mismo",
+    "billing__player_offline" : "El cliente indicado no se encuentra en la ciudad",
+    "billing__faction_not_allowed" : "Esta facción no puede emitir facturas",
+    "billing__invoice_accepted" : "Has aceptado la factura y realizado el pago",
+    "billing__invoice_payed" : "El cliente ha aceptado la factura y realizó el pago",
+    "billing__invoice_rejected" : "Has rechazado la factura",
+    "billing__invoice_not_payed" : "El cliente ha rechazado la factura",
+    "billing__target_label" : "Enviar Factura",
+
+    "billing__creation_label" : "🧾 Crear Factura",
+    "billing__ammount_label" : "Importe a cobrar",
+    "billing__ammount_description" : "El importe total de la factura",
+    "billing__concept_label" : "Concepto",
+    "billing__concept_description" : "Productos/Servicios adquiridos",
+
+    "menu__creation_label" : "📋 Actualizar Menú",
+    "menu__label" : "Enlace de la imagen",
+    "menu__description" : "Se permiten imágenes en formato jpg, jpeg y png",
+    "menu__cancelled_creation" : "Has cancelado la actualización del menú",
+    "menu__error_url_not_valid" : "El enlace no es válido :(",
+
+    "billing__gatewaypay_label" : "Forma de pago",
+    "billing__gatewaypay_debitcard" : "Tarjeta de Débito",
+
+    "billing__cancelled_creation" : "Has cancelado la emisión de la factura",
+    "billing__employee_not_duty" : "Debes estar en servicio para emitir facturas",
+    "billing__header_label" : "🧾 Tu Factura Digital 🧾",
+    "billing__header_invoice_number" : "Número de Boleta",
+    "billing__header_payment_form" : "Forma de Pago",
+    "billing__header_ammount" : "Importe a pagar",
+    "billing__header_payment_label" : "Transferencia",
+    "billing__payment_accept" : "Aceptar factura",
+    "billing__payment_reject" : "Rechazar factura",
+
+    "billing__email_subject" : "Factura pagada",
+    "billing__email_sender" : "Factura digital de %s",
+    "billing__email_content_client" : "Has pagado una factura de $%s",
+    "billing__email_content_employee_without_comm" : "Un cliente ha pagado una factura de $<b>%s</b>",
+    "billing__email_content_employee_with_comm" : "Un cliente ha pagado una factura de $<b>%s</b>.<br><br>Tu comisión es de $<b>%s</b>",
+
+    "garage__target_label" : "Garage de Facción",
+    "garage__option_take_vehicle" : "Quitar Vehículo",
+    "garage__option_return_vehicle" : "Devolver vehículo",
+    "garage__vehicle_not_job" : "Este vehículo no es de tu trabajo",
+    "garage__vehicle_not_nearby" : "No veo el vehículo, asegurate haberlo dejado cerca",
+
+    "store__target_label" : "Abrir tienda",
+    "store__not_available" : "No tienes un empleo habilitado para acceder a esta tienda",
+    "store__not_duty" : "No te encuentras en servicio",
+    "store__inventory_label" : "🍪 Tienda de insumos",
+
+    "radialmenu__title" : "Trabajo",
+    "radialmenu__menu_cat" : "Carta",
+    "radialmenu__menu_update" : "Actualizar Menú",
+    "radialmenu__menu_get" : "Obtener Menú",
+    "radialmenu__send_alert" : "Enviar Anuncio",
+    "radialmenu__alert_open" : "Abierto",
+    "radialmenu__alert_closed" : "Cerrado",
+    "radialmenu__clothing" : "Vestidor",
+    "radialmenu__bossmenu" : "Menú de jefatura",
+
+    "menu_updater__not_permission" : "No tienes permiso para ejecutar este comando",
+    "menu_updater__updated" : "Se ha actualizado el menú correctamente",
+
+    "stash__label_fridge" : "Refrigerador %s (%s)",
+    "stash__label_bar" : "Bandeja del Mostrador %s (%s)",
+    "stash__label_tray" : "Bandeja de la Mesa %s (%s)",
+
+    "stash__target_fridge" : "Refrigerador",
+    "stash__target_bar" : "Mostrador %s",
+    "stash__target_tray" : "Mesa %s",
+
+    "area__craft_food" : "🍳 Estación de alimentos",
+    "area__craft_drink" : "🥤 Estación de bebidas",
+
+    "preparing_food_progress" : "Preparando %s",
+
+    "preparing_food_success" : "Has preparado exitosamente x1 %s",
+    "preparing_food_cancelled" : "Has cancelado la preparación",
+    "preparing_food_not_items" : "No cuentas con los ingredientes necesarios",
+
+    "commerce_status_open" : "¡%s está abierto!'",
+    "commerce_status_closed" : "¡%s está cerrado!"
+}

@@ -1,3 +1,4 @@
+lib.locale()
 local QBCore = exports['qb-core']:GetCoreObject()
 local listaJobs  = {}
 PlayerData = nil
@@ -56,7 +57,7 @@ CreateThread(function()
                     {
                         event = eventGetVehicle,
                         icon = "fas fa-car",
-                        label = "Quitar Vehículo",
+                        label = locale('garage__option_take_vehicle'),
                         canInteract = function(entity, distance, data)
                             if PlayerData == nil or listaJobs[PlayerData.name] == nil or not PlayerData.onduty then return false end -- no usar si no tenemos el job o estamos fuera de servicio
                             return true
@@ -65,7 +66,7 @@ CreateThread(function()
                     {
                         event = eventSaveVehicle,
                         icon = "fas fa-circle",
-                        label = "Devolver vehículo",
+                        label = locale('garage__option_return_vehicle'),
                         canInteract = function(entity, distance, data)
                             if PlayerData == nil or listaJobs[PlayerData.name] == nil or not PlayerData.onduty then return false end -- no usar si no tenemos el job o estamos fuera de servicio
                             return true
@@ -81,7 +82,7 @@ CreateThread(function()
                 for i = 1, #listaVehs do
                     local MenuOptionsVeh = {
                         id    = 'neko_restaurants_vehicles_options:'..commerceId,
-                        title = 'Garage de Facción',
+                        title = locale('garage__target_label'),
                         options = {}
                     }
 
@@ -111,10 +112,10 @@ CreateThread(function()
                         DeleteVehicle(car)
                         DeleteEntity(car)
                     else
-                        lib.notify({ description = 'Este vehículo no es de tu trabajo', type = 'error' })
+                        lib.notify({ description = locale('garage__vehicle_not_job'), type = 'error' })
                     end
                 else
-                    lib.notify({ description = 'No veo el vehículo, asegurate haberlo dejado cerca', type = 'error' })
+                    lib.notify({ description = locale('garage__vehicle_not_nearby'), type = 'error' })
                 end
             end)
         end

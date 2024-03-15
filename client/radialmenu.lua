@@ -1,3 +1,4 @@
+lib.locale()
 local QBCore = exports['qb-core']:GetCoreObject()
 local menuID
 local listaJobs  = {}
@@ -42,17 +43,17 @@ function CreateMenu(PlayerData)
 
     local menu = {
         id = 'nekorestaurants',
-        title = 'Trabajo',
+        title = locale('radialmenu__title'),
         icon = 'mug-hot',
         items = {
             {
                 id = 'nekorestaurants_menumanager',
-                title = 'Carta',
+                title = locale('radialmenu__menu_cat'),
                 icon = 'clipboard',
                 items = {
                     {
                         id = 'nekorestaurants_updatemenu',
-                        title = 'Actualizar Menú',
+                        title = locale('radialmenu__menu_update'),
                         icon = 'clipboard',
                         type = 'client',
                         event = 'neko_restaurants:client:updateMenu',
@@ -60,7 +61,7 @@ function CreateMenu(PlayerData)
                     },
                     {
                         id = 'nekorestaurants_getmenu',
-                        title = 'Obtener Menú',
+                        title = locale('radialmenu__menu_get'),
                         icon = 'copy',
                         type = 'server',
                         event = 'neko_restaurants:server:giveitem_restaurantmenu',
@@ -70,14 +71,14 @@ function CreateMenu(PlayerData)
             },
             {
                 id = 'nekorestaurants_avisos',
-                title = 'Enviar Anuncio',
+                title = locale('radialmenu__send_alert'),
                 icon = 'business-time',
                 type = 'server',
                 event = 'nekorestaurants:server:togglenotif_abierto',
                 items = {
                     {
                         id = 'nekorestaurants_aviso_abierto',
-                        title = 'Abierto',
+                        title = locale('radialmenu__alert_open'),
                         icon = 'business-time',
                         type = 'server',
                         event = 'nekorestaurants:server:togglenotif_abierto',
@@ -85,7 +86,7 @@ function CreateMenu(PlayerData)
                     },
                     {
                         id = 'nekorestaurants_aviso_cerrado',
-                        title = 'Cerrado',
+                        title = locale('radialmenu__alert_closed'),
                         icon = 'business-time',
                         type = 'server',
                         event = 'nekorestaurants:server:togglenotif_cerrado',
@@ -95,7 +96,7 @@ function CreateMenu(PlayerData)
             },
             {
                 id = 'nekorestaurants_vestido',
-                title = 'Vestidor',
+                title = locale('radialmenu__clothing'),
                 icon = 'shirt',
                 type = 'client',
                 event = 'neko_restaurants:client:openJobOutfitsMenu',
@@ -107,7 +108,7 @@ function CreateMenu(PlayerData)
     if PlayerData.isboss then
         table.insert(menu.items, {
             id = 'nekorestaurants_boss',
-            title = 'Menú de jefatura',
+            title = locale('radialmenu__bossmenu'),
             icon = 'briefcase',
             type = 'client',
             event = 'qb-bossmenu:client:OpenMenu',
@@ -124,7 +125,6 @@ RegisterNetEvent('neko_restaurants:client:openJobOutfitsMenu', function()
         TriggerEvent("illenium-apearance:client:outfitsCommand", PlayerData.name)
     end)
 end)
-
 
 -- ===== Eventos a nivel FiveM
 AddEventHandler('playerSpawned', function(_)

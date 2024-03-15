@@ -6,7 +6,7 @@ author 'KuroNeko'
 
 lua54 'yes'
 
-version '2.3'
+version '2.3.1'
 
 shared_scripts {
     '@ox_lib/init.lua',
@@ -39,6 +39,7 @@ dependencies {
 ui_page 'html/index.html'
 
 files {
+    'locales/es.json',
     'html/index.html',
     'html/style.css',
     'html/notif.mp3',

@@ -1,3 +1,4 @@
+lib.locale()
 local QBCore = exports['qb-core']:GetCoreObject()
 local listaJobs  = {}
 
@@ -25,23 +26,23 @@ RegisterNetEvent('neko_restaurants:billing:server:sendBill', function(data)
                 if tonumber(data.importe) and tonumber(data.importe) > 0 then
                     local balance = billed.Functions.GetMoney('bank')
                     if balance < tonumber(data.importe) then
-                        TriggerClientEvent('ox_lib:notify', src, { description = 'El cliente no tiene el importe suficiente para pagar', type = 'error' })
-                        TriggerClientEvent('ox_lib:notify', tonumber(data.cliente), { description = 'No tienes suficiente dinero para pagar la factura', type = 'error' })
+                        TriggerClientEvent('ox_lib:notify', src, { description = locale('billing__client_no_enough_money'), type = 'error' })
+                        TriggerClientEvent('ox_lib:notify', tonumber(data.cliente), { description = locale('billing__you_has_no_money'), type = 'error' })
                     else
                         TriggerClientEvent('neko_restaurants:billing:client:popupBillMenu', tonumber(data.cliente), src, tonumber(data.importe), data.concepto, data.faccion)
-                        TriggerClientEvent('ox_lib:notify', src, { description = 'Se envió la factura al cliente', type = 'success' })
+                        TriggerClientEvent('ox_lib:notify', src, { description = locale('billing__invoice_sent'), type = 'success' })
                     end
                 else
-                    TriggerClientEvent('ox_lib:notify', src, { description = 'No puedes emitir facturas de $0', type = 'error' })
+                    TriggerClientEvent('ox_lib:notify', src, { description = locale('billing__no_invoice_0'), type = 'error' })
                 end
             else
-                TriggerClientEvent('ox_lib:notify', src, { description = 'No te puedes enviar facturas a ti mismo', type = 'error' })
+                TriggerClientEvent('ox_lib:notify', src, { description = locale('billing__no_invoice_yourself'), type = 'error' })
             end
         else
-            TriggerClientEvent('ox_lib:notify', src, { description = 'El cliente indicado no se encuentra en la ciudad', type = 'error' })
+            TriggerClientEvent('ox_lib:notify', src, { description = locale('billing__player_offline'), type = 'error' })
         end
     else
-        TriggerClientEvent('ox_lib:notify', src, { description = 'Esta facción no puede emitir facturas', type = 'error' })
+        TriggerClientEvent('ox_lib:notify', src, { description = locale('billing__faction_not_allowed'), type = 'error' })
     end
 end)
 
@@ -60,21 +61,21 @@ RegisterNetEvent('neko_restaurants:billing:server:BillPlayer', function(data)
                     exports['Renewed-Banking']:addAccountMoney(data.job, data.ammount)
                 end
 
-                SendSucessNotify(source, 'Has aceptado la factura y realizado el pago')
-                SendSucessNotify(data.biller, 'El cliente ha aceptado la factura y realizó el pago')
+                TriggerClientEvent('ox_lib:notify', source, { description = locale('billing__invoice_accepted'), type = 'success' })
+                TriggerClientEvent('ox_lib:notify', data.biller, { description = locale('billing__invoice_payed'), type = 'success' })
 
                 SendEmail(
                     biller.PlayerData.citizenid,
-                    "Factura digital de ".. biller.Job.label,
-                    "Factura pagada",
-                    string.format("Un cliente ha pagado una factura de $<b>%s</b>", data.ammount)
+                    locale('billing__email_sender', biller.Job.label),
+                    locale('billing__email_subject'),
+                    locale('billing__email_content_employee_without_comm', data.ammount)
                 )
 
                 SendEmail(
                     billed.PlayerData.citizenid,
-                    "Factura digital de ".. biller.Job.label,
-                    "Factura pagada",
-                    string.format('Has pagado una factura de $%s', data.ammount)
+                    locale('billing__email_sender', biller.Job.label),
+                    locale('billing__email_subject'),
+                    locale('billing__email_content_client', data.ammount)
                 )
             else
                 local sellerComission = round(data.ammount * ( Config.Shops[data.job].comissionPerSale / 100 ))
@@ -89,37 +90,29 @@ RegisterNetEvent('neko_restaurants:billing:server:BillPlayer', function(data)
                     exports['Renewed-Banking']:addAccountMoney(data.job, jobMoney)
                 end
 
-                SendSucessNotify(source, 'Has aceptado la factura y realizado el pago')
-                SendSucessNotify(data.biller, 'El cliente ha aceptado la factura y realizó el pago')
+                TriggerClientEvent('ox_lib:notify', source, { description = locale('billing__invoice_accepted'), type = 'success' })
+                TriggerClientEvent('ox_lib:notify', data.biller, { description = locale('billing__invoice_payed'), type = 'success' })
 
                 SendEmail(
                     biller.PlayerData.citizenid,
-                    "Factura digital de ".. biller.PlayerData.job.label,
-                    "Factura pagada",
-                    string.format("Un cliente ha pagado una factura de $<b>%s</b>.<br><br>Tu comisión es de $<b>%s</b>", data.ammount, sellerComission)
+                    locale('billing__email_sender', biller.PlayerData.job.label),
+                    locale('billing__email_subject'),
+                    locale('billing__email_content_employee_with_comm', data.ammount, sellerComission)
                 )
                 SendEmail(
                     billed.PlayerData.citizenid,
-                    "Factura digital de ".. biller.PlayerData.job.label,
-                    "Factura pagada",
-                    string.format('Has pagado una factura de $%s', data.ammount)
+                    locale('billing__email_sender', biller.PlayerData.job.label),
+                    locale('billing__email_subject'),
+                    locale('billing__email_content_client', data.ammount)
                 )
             end
 
         else
-            SendErrorNotify(source, 'Has rechazado la factura')
-            SendErrorNotify(data.biller, 'El cliente ha rechazado la factura')
+            TriggerClientEvent('ox_lib:notify', source, { description = locale('billing__invoice_rejected'), type = 'error' })
+            TriggerClientEvent('ox_lib:notify', data.biller, { description = locale('billing__invoice_not_payed'), type = 'error' })
         end
     end
 end)
-
-function SendErrorNotify(source, message)
-    TriggerClientEvent('ox_lib:notify', source, { description = message, type = 'error' })
-end
-
-function SendSucessNotify(source, message)
-    TriggerClientEvent('ox_lib:notify', source, { description = message, type = 'success' })
-end
 
 function SendEmail(citizenId, Sender, Subject, Message)
     TriggerEvent(Config.Settings.Phone..':server:sendNewMailToOffline', citizenId, { sender  = Sender, subject = Subject, message = Message })

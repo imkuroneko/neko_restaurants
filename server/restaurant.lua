@@ -1,3 +1,4 @@
+lib.locale()
 local ox_inventory = exports.ox_inventory
 local foodItem  = Config.Settings.Crafting.foodItem
 local drinkItem = Config.Settings.Crafting.drinkItem
@@ -61,7 +62,7 @@ CreateThread(function()
                     table.insert(itemsFoods, { name = foodData, currency = foodItem, price = 1 })
                 end
             end
-            ox_inventory:RegisterShop(foodStoreName, { groups = { [jobName] = 0 }, locations = foodCraftCoords, name = Config.i18n.foodCraftAreaLabel,  inventory = itemsFoods })
+            ox_inventory:RegisterShop(foodStoreName, { groups = { [jobName] = 0 }, locations = foodCraftCoords, name = locale('area__craft_food'),  inventory = itemsFoods })
 
             local drinkStoreName = 'neko_restaurants_'..jobName..'_drink'
             local itemsDrinks = {}
@@ -72,7 +73,7 @@ CreateThread(function()
                     table.insert(itemsDrinks, { name = drinkData, currency = drinkItem, price = 1 })
                 end
             end
-            ox_inventory:RegisterShop(drinkStoreName, { groups = { [jobName] = 0 }, locations = drinkCraftCoords, name = Config.i18n.drinkCraftAreaLabel, inventory = itemsDrinks })
+            ox_inventory:RegisterShop(drinkStoreName, { groups = { [jobName] = 0 }, locations = drinkCraftCoords, name = locale('area__craft_drink'), inventory = itemsDrinks })
         end
 
         for stashId, stashData in ipairs(stashes.inventory) do
@@ -80,7 +81,7 @@ CreateThread(function()
             local Settings = Config.Settings.Stashes
             CreateStash(
                 jobName..':refrigerador:'..stashId,
-                "Refrigerador "..stashId.." ("..jobName..")",
+                locale('stash__label_fridge', stashId, jobName),
                 Settings.maxSlots,
                 Settings.maxWeight,
                 { [commerceData.jobName] = 0 },
@@ -93,7 +94,7 @@ CreateThread(function()
             local Settings = Config.Settings.Stashes
             CreateStash(
                 jobName..':TrayMostrador:'..stashId,
-                "Bandeja del Mostrador "..stashId.." ("..jobName..")",
+                locale('stash__label_bar', stashId, jobName),
                 Settings.maxSlots,
                 Settings.maxWeight,
                 nil,
@@ -106,7 +107,7 @@ CreateThread(function()
             local Settings = Config.Settings.Stashes
             CreateStash(
                 jobName..':TrayClientes:'..stashId,
-                "Bandeja de la Mesa "..stashId.." ("..jobName..")",
+                locale('stash__label_tray', stashId, jobName),
                 Settings.maxSlots,
                 Settings.maxWeight,
                 nil,

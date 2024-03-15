@@ -1,3 +1,5 @@
+lib.locale()
+local ox_inventory = exports.ox_inventory
 local QBCore = exports['qb-core']:GetCoreObject()
 
 -- ========= Eventos del Script =============================================================================================================================
@@ -10,7 +12,7 @@ RegisterServerEvent('neko_restaurants:server:updatemenu', function(url)
     end
 
     if not hasPermission then
-        TriggerClientEvent('ox_lib:notify', source, { description = 'No tienes permiso para ejecutar este comando', type = 'error' })
+        TriggerClientEvent('ox_lib:notify', source, { description = locale('menu_updater__not_permission'), type = 'error' })
     end
 
     exports.oxmysql:execute([[
@@ -28,7 +30,7 @@ RegisterServerEvent('neko_restaurants:server:updatemenu', function(url)
     })
 
     TriggerClientEvent('neko_restaurants:client:listImagesMenu', source)
-    TriggerClientEvent('ox_lib:notify', source, { description = 'Se ha actualizado el menú correctamente', type = 'success' })
+    TriggerClientEvent('ox_lib:notify', source, { description = locale('menu_updater__updated'), type = 'success' })
 end)
 
 lib.callback.register('neko_restaurants:server:getMenuImages', function(source, cb)
@@ -75,8 +77,8 @@ RegisterNetEvent('neko_restaurants:server:giveitem_restaurantmenu', function()
     end
 
     if not HasPermission then
-        TriggerClientEvent('ox_lib:notify', source, { description = 'No tienes permiso para ejecutar este comando', type = 'error' })
+        TriggerClientEvent('ox_lib:notify', source, { description = locale('menu_updater__not_permission'), type = 'error' })
     end
 
-    Player.Functions.AddItem('menu_'..JobName, 1)
+    ox_inventory:AddItem(source, 'menu_'..JobName, 1)
 end)

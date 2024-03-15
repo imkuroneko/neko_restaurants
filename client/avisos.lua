@@ -1,3 +1,4 @@
+lib.locale()
 local QBCore = exports['qb-core']:GetCoreObject()
 local listaJobs  = {}
 PlayerData = nil
@@ -25,7 +26,7 @@ AddEventHandler('nekorestaurants:client:notif_abierto', function(jobName)
 
     SendNUIMessage({
         type                = 'nekorestaurants_abierto',
-        mensaje             = string.format(Config.i18n.commerceOpen, jobInfo.jobLabel),
+        mensaje             = locale('commerce_status_open', jobInfo.jobLabel),
         backgroundcolor     = jobInfo.radialMenuStatus.customize.open.backgroundcolor,
         iconbackgroundcolor = jobInfo.radialMenuStatus.customize.open.iconbackgroundcolor,
         icon                = jobInfo.radialMenuStatus.customize.open.icon,
@@ -40,7 +41,7 @@ AddEventHandler('nekorestaurants:client:notif_cerrado', function(jobName)
 
     SendNUIMessage({
         type                = 'nekorestaurants_cerrado',
-        mensaje             = string.format(Config.i18n.commerceClosed, jobInfo.jobLabel),
+        mensaje             = locale('commerce_status_closed', jobInfo.jobLabel),
         backgroundcolor     = jobInfo.radialMenuStatus.customize.closed.backgroundcolor,
         iconbackgroundcolor = jobInfo.radialMenuStatus.customize.closed.iconbackgroundcolor,
         icon                = jobInfo.radialMenuStatus.customize.closed.icon,

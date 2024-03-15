@@ -1,3 +1,4 @@
+lib.locale()
 local QBCore = exports['qb-core']:GetCoreObject()
 local listaJobs  = {}
 
@@ -17,14 +18,14 @@ AddEventHandler('nekorestaurants:server:togglenotif_abierto', function()
     if listaJobs[Player.PlayerData.job.name] == nil then return end
 
     if not Player.PlayerData.job.onduty then
-        TriggerClientEvent('ox_lib:notify', source, { description = 'Debes estar en servicio para enviar el anuncio', type = 'error' })
+        TriggerClientEvent('ox_lib:notify', source, { description = locale('announce__not_on_duty') , type = 'error' })
         return
     end
 
     local currentTime = GetGameTimer()
 
     if (currentTime - lastUsage) < cooldown then
-        TriggerClientEvent('ox_lib:notify', source, { description = 'Debes esperar unos segundos mas para enviar el anuncio', type = 'error' })
+        TriggerClientEvent('ox_lib:notify', source, { description = locale('announce__wait_seconds') , type = 'error' })
         return
     end
 
@@ -41,14 +42,14 @@ AddEventHandler('nekorestaurants:server:togglenotif_cerrado', function()
     if listaJobs[Player.PlayerData.job.name] == nil then return end
 
     if not Player.PlayerData.job.onduty then
-        TriggerClientEvent('ox_lib:notify', source, { description = 'Debes estar en servicio para enviar el anuncio', type = 'error' })
+        TriggerClientEvent('ox_lib:notify', source, { description = locale('announce__not_on_duty'), type = 'error' })
         return
     end
 
     local currentTime = GetGameTimer()
 
     if (currentTime - lastUsage) < cooldown then
-        TriggerClientEvent('ox_lib:notify', source, { description = 'Debes esperar unos segundos mas para enviar el anuncio', type = 'error' })
+        TriggerClientEvent('ox_lib:notify', source, { description = locale('announce__wait_seconds'), type = 'error' })
         return
     end
 

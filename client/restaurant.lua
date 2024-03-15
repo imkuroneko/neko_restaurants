@@ -1,4 +1,4 @@
-local QBCore = exports["qb-core"]:GetCoreObject()
+lib.locale()
 local ox_inventory = exports.ox_inventory
 local SpawnedProps = {}
 local itemNames = {}
@@ -18,7 +18,7 @@ RegisterNetEvent('neko_restaurants:client:createBarTrays', function(trayName, tr
         trayParams.width,
         trayParams.height,
         { name = trayName, heading = trayParams.heading, debugPoly = config.debug, minZ = trayParams.minZ, maxZ = trayParams.maxZ },
-        { distance = 3.0, options = { { icon = "fas fa-box", label = "Mostrador "..num, event = trayEvent } } }
+        { distance = 3.0, options = { { icon = "fas fa-box", label = locale('stash__target_bar', num), event = trayEvent } } }
     )
 
     RegisterNetEvent(trayEvent, function()
@@ -33,7 +33,7 @@ RegisterNetEvent('neko_restaurants:client:createTablesTrays', function(trayName,
         trayParams.width,
         trayParams.height,
         { name = trayName, heading = trayParams.heading, debugPoly = config.debug, minZ = trayParams.minZ, maxZ = trayParams.maxZ },
-        { distance = 3.0, options = { { icon = "fas fa-box", label = "Mesa "..num, event = trayEvent } } }
+        { distance = 3.0, options = { { icon = "fas fa-box", label = locale('stash__target_tray', num), event = trayEvent } } }
     )
 
     RegisterNetEvent(trayEvent, function()
@@ -48,7 +48,7 @@ RegisterNetEvent('neko_restaurants:client:createFridge', function(refriName, ref
         refriParams.width,
         refriParams.height,
         { name = refriName, heading = refriParams.heading, debugPoly = config.debug, minZ = refriParams.minZ, maxZ = refriParams.maxZ },
-        { distance = 2.0, options = { { icon = "", label = "📦 Abrir refrigerador", event = refriEvent, job = jobName } } }
+        { distance = 2.0, options = { { icon = "", label = locale('stash__target_fridge'), event = refriEvent, job = jobName } } }
     )
 
     RegisterNetEvent(refriEvent, function()
@@ -59,9 +59,9 @@ end)
 RegisterNetEvent('neko_restaurants:client:createCraftArea', function(craftAreaName, craftAreaEvent, num, craftAreaParams, config, jobName)
     local craftAreaLabel
     if craftAreaParams.type == 'food' then
-        craftAreaLabel = Config.i18n.foodCraftAreaLabel
+        craftAreaLabel = locale('area__craft_food')
     else
-        craftAreaLabel = Config.i18n.drinkCraftAreaLabel
+        craftAreaLabel = locale('area__craft_drink')
     end
 
     exports['qb-target']:AddBoxZone(
@@ -151,7 +151,7 @@ CreateThread(function()
 
                         local craftParams = {
                             duration = 4000,
-                            label = 'Preparando '..rewardName,
+                            label = locale('preparing_food_progress', rewardName),
                             useWhileDead = false,
                             position = 'bottom',
                             canCancel = true,
@@ -172,12 +172,12 @@ CreateThread(function()
 
                             TriggerServerEvent(itemGiveServerEvent)
 
-                            lib.notify({ description = 'Has preparado exitosamente x1 '..rewardName, type = 'success' })
+                            lib.notify({ description = locale('preparing_food_success', rewardName), type = 'success' })
                         else
-                            lib.notify({ description = 'Has dejado de preparar el alimento', type = 'error' })
+                            lib.notify({ description = locale('preparing_food_cancelled'), type = 'error' })
                         end
                     else
-                        lib.notify({ description = 'No cuentas con los ingredientes necesarios', type = 'error' })
+                        lib.notify({ description = locale('preparing_food_not_items'), type = 'error' })
                     end
                 end)
             end
@@ -190,7 +190,7 @@ CreateThread(function()
                 RegisterNetEvent(craftName, function()
                     local CraftMenu = {
                         id    = 'neko_restaurants_craft_options:'..jobName..':food',
-                        title = Config.i18n.foodCraftAreaLabel,
+                        title = locale('area__craft_food'),
                         options = {}
                     }
 
@@ -219,7 +219,7 @@ CreateThread(function()
                 RegisterNetEvent(craftName, function()
                     local CraftMenu = {
                         id      = 'neko_restaurants_craft_options:'..jobName..':drink',
-                        title   = Config.i18n.drinkCraftAreaLabel,
+                        title   = locale('area__craft_drink'),
                         options = {}
                     }
 

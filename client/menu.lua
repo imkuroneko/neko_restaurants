@@ -1,33 +1,18 @@
-local QBCore = exports["qb-core"]:GetCoreObject()
-local playerJob = nil
-
--- ========= Eventos QBCore =================================================================================================================================
-RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
-    QBCore.Functions.GetPlayerData(function(PlayerData)
-        playerJob = PlayerData.job
-    end)
-end)
-
-RegisterNetEvent('QBCore:Client:OnJobUpdate', function(JobInfo)
-    playerJob = JobInfo
-end)
-
+lib.locale()
 
 -- ========= Eventos del Script =============================================================================================================================
 RegisterNetEvent('neko_restaurants:client:updateMenu', function()
-    local dialog = exports['qb-input']:ShowInput({
-        header = "📋 Menú del local",
-        submitText = "Guardar",
-        inputs = {
-            { text = "Imagen del menú (solo enlaces de imgur) <br> <small>(ej: https://i.imgur.com/56MnFt6.png)</small>", name = "url", type = "url", isRequired = true },
-        },
+    local input = lib.inputDialog(locale('menu__creation_label'), {
+        { type = 'input', required = true, icon = { 'fas', 'list' }, label = locale('menu__label'), description = locale('menu__description') }
     })
 
-    if dialog ~= nil and dialog.url then
-        if ValidarUrlImgur(dialog.url) then
-            TriggerServerEvent('neko_restaurants:server:updatemenu', dialog.url)
+    if not input then
+        return lib.notify({ description = locale('menu__cancelled_creation'), type = 'info' })
+    else
+        if ValidarEnlace(input[1]) then
+            TriggerServerEvent('neko_restaurants:server:updatemenu', input[1])
         else
-            lib.notify({ description = 'Solo se permiten imágenes subidas a imgur', type = 'error' })
+            lib.notify({ description = locale('menu__error_url_not_valid'), type = 'error' })
         end
     end
 end)
@@ -46,10 +31,10 @@ end)
 TriggerEvent('neko_restaurants:client:listImagesMenu')
 
 -- ========= Funciones del Script ===========================================================================================================================
-function ValidarUrlImgur(input)
-    local dominio = string.match(input, "https://([^/]+)")
-    if dominio ~= "i.imgur.com" then
+function ValidarEnlace(enlace)
+    if string.match(enlace, "^https?://[%w-_%.%?%.:/%+=&%@]+$") then
+        return true
+    else
         return false
     end
-    return true
 end

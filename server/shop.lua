@@ -1,3 +1,4 @@
+lib.locale()
 local ox_inventory = exports.ox_inventory
 local listaJobs  = {}
 local listaItems = {}
@@ -20,7 +21,7 @@ end
 
 if foodItem ~= '' and drinkItem ~= '' and foodItem ~= nil and drinkItem ~= nil then
     ox_inventory:RegisterShop('nekoRestaurantOxShop', {
-        name = '🍪 Tienda de insumos',
+        name = locale('store__inventory_label'),
         inventory = listaItems,
         locations = { Config.Settings.StoreCraftItems.targetZone },
         groups = listaJobs

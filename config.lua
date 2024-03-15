@@ -44,14 +44,6 @@ Config.Settings = {
     }
 }
 
--- ===== i18n
-Config.i18n = {
-    foodCraftAreaLabel  = '🍳 Estación de alimentos',
-    drinkCraftAreaLabel = '🥤 Estación de bebidas',
-    commerceOpen        = '¡%s está abierto!',
-    commerceClosed      = '¡%s está cerrado!',
-}
-
 -- ===== Facciones
 Config.Shops = {
     ['burgershot'] = {
@@ -488,7 +480,7 @@ Config.Shops = {
 
     ['tequila'] = {
         -- ===== Para visualizar los perímetros temporalmente
-        debug   = false,
+        debug   = true,
 
         -- ===== Nombre del job (qb-core/shared/jobs.lua)
         jobName = 'tequila',
@@ -521,12 +513,18 @@ Config.Shops = {
         stashes = {
             -- ===== Refrigeradores (para artículos ya preparados y cosas así)
             inventory = {
-                { coords = vector3(-563.016, 284.431, 81.886), heading = 30.0, minZ = 81.386, maxZ = 82.386, width = 1.4, height = 1.4 },
+                { coords = vector3(-563.029, 284.506, 82.376), heading = 355.0, minZ = 81.826, maxZ = 82.926, width = 0.8, height = 0.8 }, -- planta baja
+                { coords = vector3(-568.503, 276.709, 77.776), heading = 355.0, minZ = 76.776, maxZ = 78.776, width = 0.8, height = 2.6 }, -- subsuelo
             },
 
             -- ===== Bandejas (para poder facilitar los artículos a los clientes)
             bar = {
-                -- { coords = vector3(-1165.88, -1442.07, 4.51), heading = 84.93, minZ = 4.00, maxZ = 6.00, width = 0.5, height = 0.7, prop = 'prop_food_tray_01' },
+                { coords = vector3(-560.829, 286.406, 82.276), heading = 355.00, minZ = 82.126, maxZ = 82.426, width = 0.4, height = 0.4, prop = 'prop_peanut_bowl_01' }, -- planta baja
+                { coords = vector3(-560.629, 289.206, 82.276), heading = 355.00, minZ = 82.126, maxZ = 82.426, width = 0.4, height = 0.4, prop = 'prop_peanut_bowl_01' }, -- planta baja
+                { coords = vector3(-560.929, 284.606, 82.276), heading = 355.00, minZ = 82.126, maxZ = 82.426, width = 0.4, height = 0.4, prop = 'prop_peanut_bowl_01' }, -- planta baja
+
+                { coords = vector3(-569.604, 279.225, 77.776), heading = 355.00, minZ = 77.626, maxZ = 77.926, width = 0.6, height = 0.6, prop = 'prop_peanut_bowl_01' }, -- subsuelo
+                { coords = vector3(-566.305, 279.025, 77.776), heading = 355.00, minZ = 77.626, maxZ = 77.926, width = 0.6, height = 0.6, prop = 'prop_peanut_bowl_01' }, -- subsuelo
             },
 
             -- ===== Mesas del comercio
@@ -540,10 +538,11 @@ Config.Shops = {
         consumables = {
             -- ===== Áreas de Crafteo
             craftingArea = {
-                { coords = vector3(-561.373, 285.293, 82.176), heading = 35.0, minZ = 81.796, maxZ = 82.796, width = 1.4, height = 1.4, prop = nil, type = 'drink' },
-                { coords = vector3(-560.975, 288.031, 82.177), heading = 35.0, minZ = 81.796, maxZ = 82.796, width = 1.4, height = 1.4, prop = nil, type = 'drink' },
-                { coords = vector3(-563.164, 288.882, 82.296), heading = 35.0, minZ = 81.796, maxZ = 82.796, width = 1.4, height = 1.4, prop = nil, type = 'food' },
-                { coords = vector3(-563.138, 285.659, 82.396), heading = 35.0, minZ = 81.646, maxZ = 82.646, width = 1.4, height = 1.4, prop = nil, type = 'food' },
+                { coords = vector3(-563.029, 288.706, 82.376), heading = 355.0, minZ = 82.076, maxZ = 82.676, width = 1.7, height = 0.9, prop = nil, type = 'food' },  -- planta baja
+                { coords = vector3(-563.329, 285.906, 82.376), heading = 355.0, minZ = 82.076, maxZ = 82.676, width = 1.7, height = 0.9, prop = nil, type = 'food' },  -- planta baja
+                { coords = vector3(-561.229, 285.406, 82.376), heading = 355.0, minZ = 82.076, maxZ = 82.676, width = 1.0, height = 0.7, prop = nil, type = 'drink' }, -- planta baja
+                { coords = vector3(-561.029, 288.106, 82.376), heading = 355.0, minZ = 82.076, maxZ = 82.676, width = 1.0, height = 0.7, prop = nil, type = 'drink' }, -- planta baja
+                { coords = vector3(-567.903, 278.709, 77.476), heading = 355.0, minZ = 76.676, maxZ = 78.276, width = 0.6, height = 1.3, prop = nil, type = 'drink' }, -- subsuelo
             },
 
             foods = {
