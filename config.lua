@@ -9,7 +9,7 @@ Config.Settings = {
     Management         = 'Renewed-Banking', -- 'Renewed-Banking' || 'qb-management'
 
     -- ===== Crafteos
-    Crafting = {
+    Preparation = {
         ItemsPrice = 45, -- precio del item
         foodItem   = 'item_craft_comidas', -- nombre del item para crafteo de alimentos
         drinkItem  = 'item_craft_bebidas', -- nombre del item para crafteo de bebidas
@@ -21,7 +21,7 @@ Config.Settings = {
     UseListMenu        = false,
 
     -- ===== Tienda de insumos para crafteos
-    StoreCraftItems    = {
+    StorePrepareItems  = {
         targetZone = vector3(81.37, -219.27, 53.64),
         targetHeading = 346.91,
         coords = vector4(81.37, -219.27, 53.64, 346.91),
@@ -104,14 +104,15 @@ Config.Shops = {
         -- ===== Comestibles
         consumables = {
             -- ===== Áreas de Crafteo
-            craftingArea = {
-                { coords = vector3(-1195.294, -900.373, 13.386), heading = 345.0, minZ = 12.886, maxZ = 13.886, width = 1.0, height = 1.0, prop = nil, type = 'food' },
-                { coords = vector3(-1196.294, -899.974, 13.386), heading = 345.0, minZ = 12.886, maxZ = 13.886, width = 1.0, height = 1.0, prop = nil, type = 'food' },
-                { coords = vector3(-1196.993, -899.874, 13.386), heading = 345.0, minZ = 12.886, maxZ = 13.886, width = 1.0, height = 1.0, prop = nil, type = 'food' },
-                { coords = vector3(-1195.894, -897.174, 13.486), heading = 345.0, minZ = 12.986, maxZ = 13.986, width = 1.0, height = 1.0, prop = nil, type = 'food' },
-
-                { coords = vector3(-1190.195, -898.874, 13.786), heading = 305.0, minZ = 12.836, maxZ = 14.736, width = 1.2, height = 1.3, prop = nil, type = 'drink' },
-                { coords = vector3(-1191.095, -899.674, 13.786), heading = 305.0, minZ = 12.836, maxZ = 14.736, width = 1.2, height = 1.3, prop = nil, type = 'drink' },
+            serviceAreaFood = {
+                { coords = vector3(-1195.294, -900.373, 13.386), heading = 345.0, minZ = 12.886, maxZ = 13.886, width = 1.0, height = 1.0, prop = nil },
+                { coords = vector3(-1196.294, -899.974, 13.386), heading = 345.0, minZ = 12.886, maxZ = 13.886, width = 1.0, height = 1.0, prop = nil },
+                { coords = vector3(-1196.993, -899.874, 13.386), heading = 345.0, minZ = 12.886, maxZ = 13.886, width = 1.0, height = 1.0, prop = nil },
+                { coords = vector3(-1195.894, -897.174, 13.486), heading = 345.0, minZ = 12.986, maxZ = 13.986, width = 1.0, height = 1.0, prop = nil },
+            },
+            serviceAreaDrink = {
+                { coords = vector3(-1190.195, -898.874, 13.786), heading = 305.0, minZ = 12.836, maxZ = 14.736, width = 1.2, height = 1.3, prop = nil },
+                { coords = vector3(-1191.095, -899.674, 13.786), heading = 305.0, minZ = 12.836, maxZ = 14.736, width = 1.2, height = 1.3, prop = nil },
             },
 
             foods = {
@@ -183,10 +184,12 @@ Config.Shops = {
         -- ===== Comestibles
         consumables = {
             -- ===== Áreas de Crafteo
-            craftingArea = {
-                { coords = vector3(136.917, -1283.695, 29.255), heading = 30.0, minZ = 28.755, maxZ = 29.755, width = 1.8, height = 1.8, prop = 'prop_food_tray_01', type = 'food' },
-                { coords = vector3(134.817, -1279.996, 29.255), heading = 30.0, minZ = 28.755, maxZ = 29.755, width = 1.8, height = 1.8, prop = 'prop_food_tray_01', type = 'drink' },
-                { coords = vector3(135.917, -1281.896, 29.255), heading = 30.0, minZ = 28.755, maxZ = 29.755, width = 1.8, height = 1.8, prop = 'prop_food_tray_01', type = 'drink' },
+            serviceAreaFood = {
+                { coords = vector3(134.817, -1279.996, 29.255), heading = 30.0, minZ = 28.755, maxZ = 29.755, width = 1.8, height = 1.8, prop = 'prop_food_tray_01' },
+                { coords = vector3(135.917, -1281.896, 29.255), heading = 30.0, minZ = 28.755, maxZ = 29.755, width = 1.8, height = 1.8, prop = 'prop_food_tray_01' },
+            },
+            serviceAreaDrink = {
+                { coords = vector3(136.917, -1283.695, 29.255), heading = 30.0, minZ = 28.755, maxZ = 29.755, width = 1.8, height = 1.8, prop = 'prop_food_tray_01' },
             },
 
             foods = {
@@ -272,16 +275,17 @@ Config.Shops = {
         -- ===== Comestibles
         consumables = {
             -- ===== Áreas de Crafteo
-            craftingArea = {
-                { coords = vector3(-1389.106, -608.136, 30.719), heading = 30.0, minZ = 30.219, maxZ = 31.219, width = 1.4, height = 1.4, prop = nil, type = 'food' },
-                { coords = vector3(-1392.309, -610.168, 30.669), heading = 30.0, minZ = 30.219, maxZ = 31.219, width = 1.4, height = 1.4, prop = nil, type = 'food' },
-                { coords = vector3(-1390.643, -612.693, 30.519), heading = 30.0, minZ = 30.219, maxZ = 31.219, width = 1.4, height = 1.4, prop = nil, type = 'food' },
-                { coords = vector3(-1387.811, -610.687, 30.319), heading = 30.0, minZ = 30.219, maxZ = 31.219, width = 1.4, height = 1.4, prop = nil, type = 'food' },
-
-                { coords = vector3(-1390.484, -606.401, 29.819), heading = 30.00, minZ = 29.319, maxZ = 30.319, width = 1.4, height = 1.4, prop = nil, type = 'drink' },
-                { coords = vector3(-1392.706, -607.572, 29.819), heading = 30.00, minZ = 29.319, maxZ = 30.319, width = 1.4, height = 1.4, prop = nil, type = 'drink' },
-                { coords = vector3(-1389.631, -614.191, 30.219), heading = 30.00, minZ = 29.319, maxZ = 30.319, width = 1.4, height = 1.4, prop = nil, type = 'drink' },
-                { coords = vector3(-1386.664, -612.502, 30.319), heading = 30.00, minZ = 29.319, maxZ = 30.319, width = 1.4, height = 1.4, prop = nil, type = 'drink' },
+            serviceAreaFood = {
+                { coords = vector3(-1389.106, -608.136, 30.719), heading = 30.0, minZ = 30.219, maxZ = 31.219, width = 1.4, height = 1.4, prop = nil },
+                { coords = vector3(-1392.309, -610.168, 30.669), heading = 30.0, minZ = 30.219, maxZ = 31.219, width = 1.4, height = 1.4, prop = nil },
+                { coords = vector3(-1390.643, -612.693, 30.519), heading = 30.0, minZ = 30.219, maxZ = 31.219, width = 1.4, height = 1.4, prop = nil },
+                { coords = vector3(-1387.811, -610.687, 30.319), heading = 30.0, minZ = 30.219, maxZ = 31.219, width = 1.4, height = 1.4, prop = nil },
+            },
+            serviceAreaDrink = {
+                { coords = vector3(-1390.484, -606.401, 29.819), heading = 30.00, minZ = 29.319, maxZ = 30.319, width = 1.4, height = 1.4, prop = nil },
+                { coords = vector3(-1392.706, -607.572, 29.819), heading = 30.00, minZ = 29.319, maxZ = 30.319, width = 1.4, height = 1.4, prop = nil },
+                { coords = vector3(-1389.631, -614.191, 30.219), heading = 30.00, minZ = 29.319, maxZ = 30.319, width = 1.4, height = 1.4, prop = nil },
+                { coords = vector3(-1386.664, -612.502, 30.319), heading = 30.00, minZ = 29.319, maxZ = 30.319, width = 1.4, height = 1.4, prop = nil },
             },
 
             foods = {
@@ -365,14 +369,15 @@ Config.Shops = {
         -- ===== Comestibles
         consumables = {
             -- ===== Áreas de Crafteo
-            craftingArea = {
-                { coords = vector3(353.444, 288.87, 92.11), heading = 30.0, minZ = 91.61, maxZ = 92.61, width = 1.4, height = 1.4, prop = nil, type = 'food' },
-                { coords = vector3(351.242, 289.647, 92.01), heading = 30.0, minZ = 91.61, maxZ = 92.61, width = 1.4, height = 1.4, prop = nil, type = 'food' },
-                { coords = vector3(355.058, 282.574, 95.291), heading = 345.01, minZ = 94.791, maxZ = 95.791, width = 4.3, height = 1.4, prop = nil, type = 'food' },
-
-                { coords = vector3(352.905, 288.71, 90.92), heading = 30.0, minZ = 90.42, maxZ = 91.42, width = 1.4, height = 1.4, prop = nil, type = 'drink' },
-                { coords = vector3(351.245, 289.13, 91.19), heading = 30.0, minZ = 90.42, maxZ = 91.42, width = 1.4, height = 1.4, prop = nil, type = 'drink' },
-                { coords = vector3(355.684, 282.795, 93.891), heading = 345.01, minZ = 93.391, maxZ = 94.391, width = 1.4, height = 1.4, prop = nil, type = 'drink' },
+            serviceAreaFood = {
+                { coords = vector3(353.444, 288.87, 92.11), heading = 30.0, minZ = 91.61, maxZ = 92.61, width = 1.4, height = 1.4, prop = nil },
+                { coords = vector3(351.242, 289.647, 92.01), heading = 30.0, minZ = 91.61, maxZ = 92.61, width = 1.4, height = 1.4, prop = nil },
+                { coords = vector3(355.058, 282.574, 95.291), heading = 345.01, minZ = 94.791, maxZ = 95.791, width = 4.3, height = 1.4, prop = nil },
+            },
+            serviceAreaDrink = {
+                { coords = vector3(352.905, 288.71, 90.92), heading = 30.0, minZ = 90.42, maxZ = 91.42, width = 1.4, height = 1.4, prop = nil },
+                { coords = vector3(351.245, 289.13, 91.19), heading = 30.0, minZ = 90.42, maxZ = 91.42, width = 1.4, height = 1.4, prop = nil },
+                { coords = vector3(355.684, 282.795, 93.891), heading = 345.01, minZ = 93.391, maxZ = 94.391, width = 1.4, height = 1.4, prop = nil },
             },
 
             foods = {
@@ -451,11 +456,12 @@ Config.Shops = {
         -- ===== Comestibles
         consumables = {
             -- ===== Áreas de Crafteo
-            craftingArea = {
-                { coords = vector3(1984.33, 3050.212, 47.215), heading = 30.0, minZ = 46.715, maxZ = 47.715, width = 1.4, height = 1.4, prop = nil, type = 'food' },
-
-                { coords = vector3(1982.045, 3053.672, 46.785), heading = 30.0, minZ = 46.285, maxZ = 47.285, width = 1.4, height = 1.4, prop = nil, type = 'drink' },
-                { coords = vector3(1981.364, 3052.851, 46.785), heading = 30.0, minZ = 46.285, maxZ = 47.285, width = 1.4, height = 1.4, prop = nil, type = 'drink' },
+            serviceAreaFood = {
+                { coords = vector3(1984.33, 3050.212, 47.215), heading = 30.0, minZ = 46.715, maxZ = 47.715, width = 1.4, height = 1.4, prop = nil },
+            },
+            serviceAreaDrink = {
+                { coords = vector3(1982.045, 3053.672, 46.785), heading = 30.0, minZ = 46.285, maxZ = 47.285, width = 1.4, height = 1.4, prop = nil },
+                { coords = vector3(1981.364, 3052.851, 46.785), heading = 30.0, minZ = 46.285, maxZ = 47.285, width = 1.4, height = 1.4, prop = nil },
             },
 
             foods = {
@@ -480,7 +486,7 @@ Config.Shops = {
 
     ['tequila'] = {
         -- ===== Para visualizar los perímetros temporalmente
-        debug   = true,
+        debug   = false,
 
         -- ===== Nombre del job (qb-core/shared/jobs.lua)
         jobName = 'tequila',
@@ -537,12 +543,14 @@ Config.Shops = {
         -- ===== Comestibles
         consumables = {
             -- ===== Áreas de Crafteo
-            craftingArea = {
-                { coords = vector3(-563.029, 288.706, 82.376), heading = 355.0, minZ = 82.076, maxZ = 82.676, width = 1.7, height = 0.9, prop = nil, type = 'food' },  -- planta baja
-                { coords = vector3(-563.329, 285.906, 82.376), heading = 355.0, minZ = 82.076, maxZ = 82.676, width = 1.7, height = 0.9, prop = nil, type = 'food' },  -- planta baja
-                { coords = vector3(-561.229, 285.406, 82.376), heading = 355.0, minZ = 82.076, maxZ = 82.676, width = 1.0, height = 0.7, prop = nil, type = 'drink' }, -- planta baja
-                { coords = vector3(-561.029, 288.106, 82.376), heading = 355.0, minZ = 82.076, maxZ = 82.676, width = 1.0, height = 0.7, prop = nil, type = 'drink' }, -- planta baja
-                { coords = vector3(-567.903, 278.709, 77.476), heading = 355.0, minZ = 76.676, maxZ = 78.276, width = 0.6, height = 1.3, prop = nil, type = 'drink' }, -- subsuelo
+            serviceAreaFood = {
+                { coords = vector3(-563.029, 288.706, 82.376), heading = 355.0, minZ = 82.076, maxZ = 82.676, width = 1.7, height = 0.9, prop = nil },  -- planta baja
+                { coords = vector3(-563.329, 285.906, 82.376), heading = 355.0, minZ = 82.076, maxZ = 82.676, width = 1.7, height = 0.9, prop = nil },  -- planta baja
+            },
+            serviceAreaDrink = {
+                { coords = vector3(-561.229, 285.406, 82.376), heading = 355.0, minZ = 82.076, maxZ = 82.676, width = 1.0, height = 0.7, prop = nil }, -- planta baja
+                { coords = vector3(-561.029, 288.106, 82.376), heading = 355.0, minZ = 82.076, maxZ = 82.676, width = 1.0, height = 0.7, prop = nil }, -- planta baja
+                { coords = vector3(-567.903, 278.709, 77.476), heading = 355.0, minZ = 76.676, maxZ = 78.276, width = 0.6, height = 1.3, prop = nil }, -- subsuelo
             },
 
             foods = {
@@ -635,12 +643,13 @@ Config.Shops = {
         -- ===== Comestibles
         consumables = {
             -- ===== Áreas de Crafteo
-            craftingArea = {
-                { coords = vector3(-508.082, -36.455, 45.925), heading = 0.0, minZ = 45.675, maxZ = 46.175, width = 1.0, height = 1.1, prop = nil, type = 'drink' },
-                { coords = vector3(-514.882, -33.255, 46.025), heading = 0.0, minZ = 45.675, maxZ = 46.175, width = 1.6, height = 0.7, prop = nil, type = 'drink' },
-
-                { coords = vector3(-514.782, -37.455, 45.425), heading = 355.0, minZ = 44.875, maxZ = 45.975, width = 1.2, height = 1.5, prop = nil, type = 'food' },
-                { coords = vector3(-512.682, -35.255, 45.625), heading = 355.0, minZ = 45.075, maxZ = 46.175, width = 1.2, height = 0.7, prop = nil, type = 'food' },
+            serviceAreaFood = {
+                { coords = vector3(-514.782, -37.455, 45.425), heading = 355.0, minZ = 44.875, maxZ = 45.975, width = 1.2, height = 1.5, prop = nil },
+                { coords = vector3(-512.682, -35.255, 45.625), heading = 355.0, minZ = 45.075, maxZ = 46.175, width = 1.2, height = 0.7, prop = nil },
+            },
+            serviceAreaDrink = {
+                { coords = vector3(-508.082, -36.455, 45.925), heading = 0.0, minZ = 45.675, maxZ = 46.175, width = 1.0, height = 1.1, prop = nil },
+                { coords = vector3(-514.882, -33.255, 46.025), heading = 0.0, minZ = 45.675, maxZ = 46.175, width = 1.6, height = 0.7, prop = nil },
             },
 
             foods = {
@@ -721,9 +730,11 @@ Config.ShopsRemovidos = {
         -- ===== Comestibles
         consumables = {
             -- ===== Áreas de Crafteo
-            craftingArea = {
-                { coords = vector3(-1160.633, -1447.763, 4.353), heading = 35.0, minZ = 4.053, maxZ = 6.653, width = 1.4, height = 1.4, prop = nil, type = 'food' },
-                { coords = vector3(-1161.632, -1448.963, 4.353), heading = 35.0, minZ = 4.053, maxZ = 6.653, width = 1.4, height = 1.4, prop = nil, type = 'food' },
+            serviceAreaFood = {
+                { coords = vector3(-1160.633, -1447.763, 4.353), heading = 35.0, minZ = 4.053, maxZ = 6.653, width = 1.4, height = 1.4, prop = nil },
+                { coords = vector3(-1161.632, -1448.963, 4.353), heading = 35.0, minZ = 4.053, maxZ = 6.653, width = 1.4, height = 1.4, prop = nil },
+            },
+            serviceAreaDrink = {
             },
 
             foods = {

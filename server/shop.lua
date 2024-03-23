@@ -3,9 +3,9 @@ local ox_inventory = exports.ox_inventory
 local listaJobs  = {}
 local listaItems = {}
 
-local foodItem   = Config.Settings.Crafting.foodItem
-local drinkItem  = Config.Settings.Crafting.drinkItem
-local itemsPrice = Config.Settings.Crafting.ItemsPrice
+local foodItem   = Config.Settings.Preparation.foodItem
+local drinkItem  = Config.Settings.Preparation.drinkItem
+local itemsPrice = Config.Settings.Preparation.ItemsPrice
 
 for commerceId, commerceData in pairs(Config.Shops) do
     local jobName = commerceData.jobName
@@ -19,11 +19,14 @@ if drinkItem ~= '' and drinkItem ~= nil then
     table.insert(listaItems, { name = drinkItem, price = itemsPrice })
 end
 
+print(json.encode(listaJobs))
+print(json.encode({ Config.Settings.StorePrepareItems.targetZone }))
+
 if foodItem ~= '' and drinkItem ~= '' and foodItem ~= nil and drinkItem ~= nil then
     ox_inventory:RegisterShop('nekoRestaurantOxShop', {
         name = locale('store__inventory_label'),
         inventory = listaItems,
-        locations = { Config.Settings.StoreCraftItems.targetZone },
+        locations = { Config.Settings.StorePrepareItems.targetZone },
         groups = listaJobs
     })
 end

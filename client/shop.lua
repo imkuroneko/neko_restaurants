@@ -1,6 +1,8 @@
 lib.locale()
 local QBCore = exports["qb-core"]:GetCoreObject()
 local ox_inventory = exports.ox_inventory
+local foodItem   = Config.Settings.Preparation.foodItem
+local drinkItem  = Config.Settings.Preparation.drinkItem
 
 PlayerJob = nil
 local listaJobs  = {}
@@ -22,22 +24,28 @@ RegisterNetEvent('QBCore:Client:OnJobUpdate', function(JobInfo)
 end)
 
 CreateThread(function()
-    if Config.Settings.Crafting.foodItem ~= '' and Config.Settings.Crafting.drinkItem ~= '' and Config.Settings.Crafting.foodItem ~= nil and Config.Settings.Crafting.drinkItem ~= nil then
+    if foodItem ~= '' and drinkItem ~= '' and foodItem ~= nil and drinkItem ~= nil then
 
-        RequestModel( GetHashKey( Config.Settings.StoreCraftItems.pedModel ) )
-        while ( not HasModelLoaded( GetHashKey( Config.Settings.StoreCraftItems.pedModel ) ) ) do
+        RequestModel( GetHashKey( Config.Settings.StorePrepareItems.pedModel ) )
+        while ( not HasModelLoaded( GetHashKey( Config.Settings.StorePrepareItems.pedModel ) ) ) do
             Wait(1)
         end
-        local ped = CreatePed(1, Config.Settings.StoreCraftItems.pedHash, Config.Settings.StoreCraftItems.coords, false, true)
+        local ped = CreatePed(1, Config.Settings.StorePrepareItems.pedHash, Config.Settings.StorePrepareItems.coords, false, true)
         SetEntityInvincible(ped, true)
         SetBlockingOfNonTemporaryEvents(ped, true)
         FreezeEntityPosition(ped, true)
 
         exports['qb-target']:AddBoxZone(
             'nekoRestaurantsShop',
-            Config.Settings.StoreCraftItems.targetZone,
+            Config.Settings.StorePrepareItems.targetZone,
             1, 1,
-            { name = 'nekoRestaurantsShop', heading = Config.Settings.StoreCraftItems.targetHeading, debugPoly = false, minZ = Config.Settings.StoreCraftItems.minZ, maxZ = Config.Settings.StoreCraftItems.maxZ, },
+            {
+                name = 'nekoRestaurantsShop',
+                heading = Config.Settings.StorePrepareItems.targetHeading,
+                debugPoly = false,
+                minZ = Config.Settings.StorePrepareItems.minZ,
+                maxZ = Config.Settings.StorePrepareItems.maxZ
+            },
             {
                 options = {
                     {

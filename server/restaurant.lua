@@ -1,7 +1,7 @@
 lib.locale()
 local ox_inventory = exports.ox_inventory
-local foodItem  = Config.Settings.Crafting.foodItem
-local drinkItem = Config.Settings.Crafting.drinkItem
+local foodItem  = Config.Settings.Preparation.foodItem
+local drinkItem = Config.Settings.Preparation.drinkItem
 
 CreateThread(function()
     -- ========= Crear eventos para el crafteo de consumibles
@@ -48,9 +48,16 @@ CreateThread(function()
             local foodCraftCoords = {}
             local drinkCraftCoords = {}
 
-            for _k, data in ipairs(consumables.craftingArea) do
-                if data.type == 'food'  then table.insert(foodCraftCoords, data.coords) end
-                if data.type == 'drink' then table.insert(drinkCraftCoords, data.coords) end
+            if #consumables.serviceAreaFood > 0 then
+                for i = 1, #consumables.serviceAreaFood do
+                    table.insert(foodCraftCoords, consumables.serviceAreaFood[i].coords)
+                end
+            end
+
+            if #consumables.serviceAreaDrink > 0 then
+                for i = 1, #consumables.serviceAreaDrink do
+                    table.insert(drinkCraftCoords, consumables.serviceAreaDrink[i].coords)
+                end
             end
 
             local foodStoreName = 'neko_restaurants_'..jobName..'_food'
@@ -62,7 +69,7 @@ CreateThread(function()
                     table.insert(itemsFoods, { name = foodData, currency = foodItem, price = 1 })
                 end
             end
-            ox_inventory:RegisterShop(foodStoreName, { groups = { [jobName] = 0 }, locations = foodCraftCoords, name = locale('area__craft_food'),  inventory = itemsFoods })
+            ox_inventory:RegisterShop(foodStoreName, { groups = { [jobName] = 0 }, locations = foodCraftCoords, name = locale('area__service_food'),  inventory = itemsFoods })
 
             local drinkStoreName = 'neko_restaurants_'..jobName..'_drink'
             local itemsDrinks = {}
@@ -73,7 +80,7 @@ CreateThread(function()
                     table.insert(itemsDrinks, { name = drinkData, currency = drinkItem, price = 1 })
                 end
             end
-            ox_inventory:RegisterShop(drinkStoreName, { groups = { [jobName] = 0 }, locations = drinkCraftCoords, name = locale('area__craft_drink'), inventory = itemsDrinks })
+            ox_inventory:RegisterShop(drinkStoreName, { groups = { [jobName] = 0 }, locations = drinkCraftCoords, name = locale('area__service_drink'), inventory = itemsDrinks })
         end
 
         for stashId, stashData in ipairs(stashes.inventory) do

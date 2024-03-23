@@ -78,8 +78,8 @@
     "stash__target_bar" : "Mostrador %s",
     "stash__target_tray" : "Mesa %s",
 
-    "area__craft_food" : "🍳 Estación de alimentos",
-    "area__craft_drink" : "🥤 Estación de bebidas",
+    "area__service_food" : "🍳 Estación de alimentos",
+    "area__service_drink" : "🥤 Estación de bebidas",
 
     "preparing_food_progress" : "Preparando %s",
 
