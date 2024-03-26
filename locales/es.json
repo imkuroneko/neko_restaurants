@@ -18,8 +18,19 @@
     "billing__creation_label" : "🧾 Crear Factura",
     "billing__ammount_label" : "Importe a cobrar",
     "billing__ammount_description" : "El importe total de la factura",
-    "billing__concept_label" : "Concepto",
-    "billing__concept_description" : "Productos/Servicios adquiridos",
+    "billing__clientname_label" : "Nombre del Cliente",
+    "billing__clientcid_label" : "Identificación (CID)",
+    "billing__concept_label" : "Detalles (Productos/Servicios)",
+    "billing__concept_description" : "Para preparar la comanda de pedidos",
+    "billing__generate_order" : "Generar comanda de pedido",
+
+    "order__new_attatched" : "Se agregó un nuevo pedidos a tu lista de pendientes",
+    "order__list_empty" : "No tienes pedidos pendientes",
+    "order__removed_from_list" : "Se ha removido el pedido de la lista de pendientes",
+
+    "orders__list_header" : "Lista de pedidos",
+    "orders__list_item_title" : "%s (CID: %s)",
+    "orders__list_item_description" : "Importe: $%s\nPedido:\n%s",    
 
     "menu__creation_label" : "📋 Actualizar Menú",
     "menu__label" : "Enlace de la imagen",
@@ -66,6 +77,7 @@
     "radialmenu__alert_closed" : "Cerrado",
     "radialmenu__clothing" : "Vestidor",
     "radialmenu__bossmenu" : "Menú de jefatura",
+    "radialmenu__orders" : "Pedidos",
 
     "menu_updater__not_permission" : "No tienes permiso para ejecutar este comando",
     "menu_updater__updated" : "Se ha actualizado el menú correctamente",

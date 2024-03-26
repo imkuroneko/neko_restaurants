@@ -70,6 +70,14 @@ function CreateMenu(PlayerData)
                 }
             },
             {
+                id = 'nekorestaurants_orders',
+                title = locale('radialmenu__orders'),
+                icon = 'list',
+                type = 'client',
+                event = 'neko_restaurants:orders:client:listPendingOrders',
+                shouldClose = true
+            },
+            {
                 id = 'nekorestaurants_avisos',
                 title = locale('radialmenu__send_alert'),
                 icon = 'business-time',

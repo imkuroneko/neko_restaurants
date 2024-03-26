@@ -629,8 +629,8 @@ Config.Shops = {
 
             -- ===== Bandejas (para poder facilitar los artículos a los clientes)
             bar = {
-                { coords = vector3(-509.968, -33.976, 45.825), heading = 355.0, minZ = 45.725, maxZ = 45.925, width = 0.7, height = 1.0, prop = 'prop_food_cb_donuts' },
-                { coords = vector3(-508.068, -35.376, 45.825), heading = 90.0, minZ = 45.725, maxZ = 45.925, width = 0.7, height = 1.0, prop = 'prop_food_cb_donuts' },
+                { coords = vector3(-509.968, -33.976, 45.825), heading = 355.0, minZ = 45.725, maxZ = 45.925, width = 0.7, height = 1.0, prop = 'prop_cs_silver_tray' },
+                { coords = vector3(-508.068, -35.376, 45.825), heading = 90.0, minZ = 45.725, maxZ = 45.925, width = 0.7, height = 1.0, prop = 'prop_cs_silver_tray' },
             },
 
             -- ===== Mesas del comercio

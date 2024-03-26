@@ -19,9 +19,6 @@ if drinkItem ~= '' and drinkItem ~= nil then
     table.insert(listaItems, { name = drinkItem, price = itemsPrice })
 end
 
-print(json.encode(listaJobs))
-print(json.encode({ Config.Settings.StorePrepareItems.targetZone }))
-
 if foodItem ~= '' and drinkItem ~= '' and foodItem ~= nil and drinkItem ~= nil then
     ox_inventory:RegisterShop('nekoRestaurantOxShop', {
         name = locale('store__inventory_label'),

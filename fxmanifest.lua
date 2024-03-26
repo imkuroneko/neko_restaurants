@@ -6,7 +6,7 @@ author 'KuroNeko'
 
 lua54 'yes'
 
-version '2.3.2'
+version '2.3.3'
 
 shared_scripts {
     '@ox_lib/init.lua',
@@ -21,6 +21,7 @@ client_scripts {
     'client/avisos.lua',
     'client/shop.lua',
     'client/garages.lua',
+    'client/orders.lua'
 }
 
 server_scripts {
