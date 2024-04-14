@@ -3,7 +3,9 @@
 <p align="center">
   <img src="https://img.shields.io/github/repo-size/imkuroneko/neko_restaurants?style=flat"/> &nbsp;
   <img src="https://img.shields.io/github/languages/top/imkuroneko/neko_restaurants?style=flat"/> &nbsp;
-  <img src="https://img.shields.io/github/last-commit/imkuroneko/neko_restaurants?color=pink&style=flat"/>
+  <img src="https://img.shields.io/github/last-commit/imkuroneko/neko_restaurants?color=pink&style=flat"/> &nbsp;
+  <img src="https://img.shields.io/github/downloads/imkuroneko/neko_restaurants/total?logo=github"/> &nbsp;
+  <img src="https://img.shields.io/github/v/release/imkuroneko/neko_restaurants?logo=github"/> &nbsp;
 </p>
 
 
