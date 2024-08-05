@@ -1,3 +1,7 @@
+> [!WARNING]  
+> Este proyecto es 100% open source, por lo que NO ofrezco soporte para el mismo.
+> This project is 100% open source, so I will not provide support for it
+
 <h1 align="center">🍟 neko_restaurants</h1>
 
 <p align="center">
